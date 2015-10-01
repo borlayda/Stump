@@ -1,0 +1,2 @@
+# Stump
+Project Management framework
