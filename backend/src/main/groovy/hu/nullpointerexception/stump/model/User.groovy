@@ -1,8 +1,8 @@
-package hu.nullpointerexception.stump.model
+package groovy.hu.nullpointerexception.stump.model
 
-class User extends Entity {
+class User {
 
-	Long id
+	String id
     String username
     String password
     Map<String, String> permissions = [:]

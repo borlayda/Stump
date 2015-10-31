@@ -1,7 +1,7 @@
-package hu.nullpointerexception.stump.model
+package groovy.hu.nullpointerexception.stump.model
 
 class Entity {
 
-    Map<String, Object> properties
+    String id
 
 }
