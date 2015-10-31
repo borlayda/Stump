@@ -13,7 +13,6 @@ class Project extends Entity {
         this.title = title
         this.description = desciption
         this.status = Status.Project.OPEN
-        addId("project", Entity.projectCount++)
     }
 
     def addTask(String title, User owner, String description) {
@@ -23,5 +22,5 @@ class Project extends Entity {
     def changeStatus(Status.Project status) {
         this.status = status
     }
-    
+
 }
