@@ -1,4 +1,4 @@
-package groovy.hu.nullpointerexception.stump.model
+package hu.nullpointerexception.stump.model
 
 class Comment extends Entity {
 
