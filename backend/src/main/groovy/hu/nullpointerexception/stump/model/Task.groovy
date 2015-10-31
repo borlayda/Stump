@@ -15,6 +15,7 @@ class Task extends Entity {
         this.description = description
         this.project = project
         this.status = Status.Task.OPEN
+        addId("task", Entity.taskCount++)
     }
 
     def addComment(String text, User author) {

@@ -11,6 +11,7 @@ class Comment extends Entity {
         this.text = text
         this.author = author
         this.parent = parent
+        addId("comment", Entity.commentCount++)
     }
 
     def addComment(String text, User author) {
