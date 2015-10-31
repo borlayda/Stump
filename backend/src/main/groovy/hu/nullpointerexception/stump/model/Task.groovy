@@ -7,6 +7,7 @@ class Task extends Entity {
     Project project
     String description
     Status.Task status
+    List<Comment> comments
 
     Task(String title, User owner, String description, Project project) {
         this.title = title
@@ -14,6 +15,10 @@ class Task extends Entity {
         this.description = description
         this.project = project
         this.status = Status.Task.OPEN
+    }
+
+    def addComment(String text, User author) {
+        this.comments.add(new Comment(text, author, this))
     }
 
     def changeOwner(User newOwner) {
