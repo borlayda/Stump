@@ -1,6 +1,6 @@
 package hu.nullpointerexception.stump.model
 
-class State {
+class Status {
 
     enum Task {
         OPEN,
