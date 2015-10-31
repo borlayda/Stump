@@ -5,6 +5,6 @@ package groovy.hu.nullpointerexception.stump.model
  */
 enum Role {
 
-    ADMIN, PM, USER
+    ADMIN, PM, DEVELOPER, TESTER
 
 }
