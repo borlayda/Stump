@@ -2,21 +2,14 @@ package hu.nullpointerexception.stump.model
 
 class User extends Entity {
 
-	Long id
-    String username
+    String name
     String password
-    Map<String, String> permissions = [:]
-    String token
     String email
-    String address
+    Role role
 
-    def setUsername(name) {
-    	this.username = name
-    }
-
-    def changePassword(oldPassWord, newPassword) {
+    def changePassword(oldPassWord, newPassword){
     	if (this.password != oldPassWord){
-    		throw Error("Wrong old password")
+    		throw new RuntimeException()
     	}
     	this.password = newPassword
     }
