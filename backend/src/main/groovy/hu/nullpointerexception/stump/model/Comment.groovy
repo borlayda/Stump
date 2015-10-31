@@ -14,6 +14,5 @@ class Comment extends Entity {
     def addComment(String text, User author) {
         this.comments.add(new Comment(text, author))
     }
-    
 
 }

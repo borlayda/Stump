@@ -16,7 +16,7 @@ class Project extends Entity {
     }
 
     def addTask(String title, User owner, String description) {
-        tasks.add(new Task(title, owner, description))
+        tasks.add(new Task(title, owner, description, this))
     }
 
     def changeStatus(Status.Project status) {

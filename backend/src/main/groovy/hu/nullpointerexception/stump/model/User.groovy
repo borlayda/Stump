@@ -2,21 +2,19 @@ package groovy.hu.nullpointerexception.stump.model
 
 class User {
 
+<<<<<<< HEAD
 	String id
     String username
+=======
+    String name
+>>>>>>> 4bcde931ac4817798e116f6d702155ec751c3f13
     String password
-    Map<String, String> permissions = [:]
-    String token
     String email
-    String address
+    Role role
 
-    def setUsername(name) {
-    	this.username = name
-    }
-
-    def changePassword(oldPassWord, newPassword) {
+    def changePassword(oldPassWord, newPassword){
     	if (this.password != oldPassWord){
-    		throw Error("Wrong old password")
+    		throw new RuntimeException()
     	}
     	this.password = newPassword
     }
