@@ -12,7 +12,7 @@ class SampleController {
 
     @RequestMapping
     def root() {
-        'Yay, it works!'
+        '{}'
     }
 
 }
