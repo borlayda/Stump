@@ -3,8 +3,8 @@
 angular.module('Authentication')
   
 .controller('LoginController',
-    ['$scope', '$rootScope', '$location', '$http',
-    function ($scope, $rootScope, $location, $http) {
+    ['$scope', '$rootScope', '$location', '$http', '$window',
+    function ($scope, $rootScope, $location, $http, $window) {
         $scope.login = function () {
             var authdata = btoa($scope.username +":"+ $scope.password)
             $http.get('/api', {
@@ -13,7 +13,8 @@ angular.module('Authentication')
                 }
             }).then(function successCallback(response){
                 console.log(response);
-                $location.path('/')
+                $window.location.assign("/");
+                console.log("Change!");
             },
             function errorCallback(response){
                 console.error(response);
