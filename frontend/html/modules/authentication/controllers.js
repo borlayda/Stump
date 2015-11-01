@@ -6,9 +6,12 @@ angular.module('Authentication')
     ['$scope', '$rootScope', '$location', '$http',
     function ($scope, $rootScope, $location, $http) {
         $scope.login = function () {
-            $http.post('http://localhost:8080',
-                  { username: $scope.username, password: $scope.password })
-            .then(function successCallback(response){
+            var authdata = btoa($scope.username +":"+ $scope.password)
+            $http.get('http://localhost:8080', {
+                headers: {
+                    'Authentication': 'Basic '+authdata
+                }
+            }).then(function successCallback(response){
                 console.log(response);
                 $location.path('/')
             },
