@@ -9,3 +9,8 @@ html {
 	margin: 0px;
 	height: 100%;
 }
+
+.container {
+    width: 400px;
+    margin-top: 50px;
+}
