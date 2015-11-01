@@ -7,9 +7,9 @@ angular.module('Authentication')
     function ($scope, $rootScope, $location, $http) {
         $scope.login = function () {
             var authdata = btoa($scope.username +":"+ $scope.password)
-            $http.get('http://localhost:8080', {
+            $http.get('/api', {
                 headers: {
-                    'Authentication': 'Basic '+authdata
+                    'Authorization': 'Basic '+authdata
                 }
             }).then(function successCallback(response){
                 console.log(response);
