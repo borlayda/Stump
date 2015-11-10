@@ -81,6 +81,8 @@ background: -o-linear-gradient(top, #e0d230 0%,#805b1a 100%); /* Opera 11.10+ */
 background: -ms-linear-gradient(top, #e0d230 0%,#805b1a 100%); /* IE10+ */
 background: linear-gradient(to bottom, #e0d230 0%,#805b1a 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0d230', endColorstr='#805b1a',GradientType=0 ); /* IE6-9 */
+  width: 100%;
+  height: 100%;
 }
 @media (min-width: 768px) {
   .main {
