@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('Home')
+angular.module('Dashboard')
+.controller('DashboardController',
+    ['$scope', '$rootScope', '$location',
+    function ($scope, $rootScope, $location) {
 
-.controller('HomeController',
-    ['$scope', '$rootScope', '$location', 'AuthenticationService',
-    function ($scope, $rootScope, $location, AuthenticationService) {
-
-    }]);
+}]);

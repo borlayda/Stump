@@ -2,11 +2,11 @@
 
 // declare modules
 angular.module('Authentication', []);
-angular.module('Home', []);
+angular.module('Dashboard', []);
 
 angular.module('BasicHttpAuthExample', [
     'Authentication',
-    'Home',
+    'Dashboard',
     'ngRoute',
     'ngCookies'
 ])
@@ -20,7 +20,7 @@ angular.module('BasicHttpAuthExample', [
         })
 
         .when('/', {
-            controller: 'HomeController',
+            controller: 'DashboardController',
             templateUrl: 'modules/home/views/portal.html'
         })
 
