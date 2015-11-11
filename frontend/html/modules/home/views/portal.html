@@ -23,9 +23,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#settings">Settings</a></li>
-            <li class="navbar-collapse collapse"><a href="#projects">Projects</a></li>
-            <li class="navbar-collapse collapse"><a href="#tasks">Tasks</a></li>
+            <li><a ng-click="dashboardPartActive = 'settings'">Settings</a></li>
+            <li class="navbar-collapse collapse"><a ng-click="dashboardPartActive = 'projects'">Projects</a></li>
+            <li class="navbar-collapse collapse"><a ng-click="dashboardPartActive = 'tasks'">Tasks</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -38,13 +38,13 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar no-float">
           <ul class="nav nav-sidebar">
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#tasks">Tasks</a></li>
-            <li><a href="#settings">Settings</a></li>
+            <li><a ng-click="dashboardPartActive = 'projects'">Projects</a></li>
+            <li><a ng-click="dashboardPartActive = 'tasks'">Tasks</a></li>
+            <li><a ng-click="dashboardPartActive = 'settings'">Settings</a></li>
           </ul>
         </div>
         <div class="main slide-animate-container col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 no-float">
-          <div class="slide-animate" ng-include src="'modules/home/views/dashboard/projects.html'"></div>
+          <div class="slide-animate" ng-include src="'modules/home/views/dashboard/'+dashboardPartActive+'.html'"></div>
         </div>
       </div>
     </div>
