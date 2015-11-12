@@ -35,7 +35,7 @@ class StumpUserDetailsService implements UserDetailsService {
 
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        def user = userRepository.findByName(username)
+            def user = userRepository.findByName(username)
         if (user == null) {
             throw new UsernameNotFoundException("User not found.")
         }

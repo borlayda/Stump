@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
  * Created by totlol on 23/10/15.
  */
 @RestController('sample')
-@RequestMapping('/')
+@RequestMapping('/api')
 class SampleController {
 
     @RequestMapping

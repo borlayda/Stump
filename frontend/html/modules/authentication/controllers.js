@@ -7,7 +7,7 @@ angular.module('Authentication')
     function ($scope, $rootScope, $location, $http, $window) {
         $scope.login = function () {
             var authdata = btoa($scope.username +":"+ $scope.password)
-            $http.get('/api', {
+            $http.get('api', {
                 headers: {
                     'Authorization': 'Basic '+authdata
                 }

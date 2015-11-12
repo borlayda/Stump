@@ -1,0 +1,47 @@
+package hu.nullpointerexception.stump.service
+
+import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
+import hu.nullpointerexception.stump.model.User
+import hu.nullpointerexception.stump.repository.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.DuplicateKeyException
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Service
+
+/**
+ * Author: Márton Tóth
+ */
+@Service
+class UserService {
+
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
+        this.userRepository = repository
+        this.passwordEncoder = passwordEncoder
+    }
+
+    List<User> getAllUsers() {
+        userRepository.findAll().asList()
+    }
+
+    /**
+     * This method adds a new user to the database.
+     * It also encodes the users password.
+     *
+     * @param user
+     * @return the persisted user
+     */
+    def addUser(User user) throws EntityAlreadyExistsException {
+        user.password = passwordEncoder.encode(user.password)
+        try {
+            userRepository.save(user)
+        } catch (DuplicateKeyException e) {
+            throw new EntityAlreadyExistsException(e);
+        }
+
+    }
+
+}
