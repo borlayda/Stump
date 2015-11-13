@@ -1,5 +1,4 @@
 package hu.nullpointerexception.stump.service
-
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.exception.StumpException
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-
 /**
  * Author: Márton Tóth
  */
@@ -58,4 +56,15 @@ class UserService {
         userRepository.save(user)
     }
 
+    def deleteUser(String userId) {
+        def user = userRepository.findOne(userId)
+        if (user == null) {
+            throw new EntityNotFoundException("User not found.")
+        }
+        userRepository.delete(user)
+    }
+
+    User getUser(String userId) {
+        userRepository.findOne(userId)
+    }
 }

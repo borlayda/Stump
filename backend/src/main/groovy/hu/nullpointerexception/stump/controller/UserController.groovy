@@ -26,13 +26,24 @@ class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     List<UserJSONEntity> getUsers() {
-        userService.getAllUsers().collect { new UserJSONEntity(it) };
+        userService.getAllUsers().collect { new UserJSONEntity(it) }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "{userId}")
+    UserJSONEntity getUsers(@PathVariable("userId") String userId) {
+        new UserJSONEntity(userService.getUser(userId))
     }
 
     @RequestMapping(method = RequestMethod.POST)
     GenericResponse addUser(@RequestBody UserJSONEntity userJSONObject) throws EntityAlreadyExistsException {
         def user = userJSONObject.createNewEntity()
         userService.addUser(user)
+        return GenericResponse.okResponse()
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{userId}")
+    GenericResponse deleteUser(@PathVariable("userId") String userId) throws EntityAlreadyExistsException {
+        userService.deleteUser(userId)
         return GenericResponse.okResponse()
     }
 
