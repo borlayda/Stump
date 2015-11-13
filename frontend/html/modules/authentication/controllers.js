@@ -3,16 +3,16 @@
 angular.module('Authentication')
   
 .controller('LoginController',
-    ['$scope', '$rootScope', '$location', '$http', '$window',
-    function ($scope, $rootScope, $location, $http, $window) {
+    ['$scope', '$rootScope', '$location', '$http', '$window', '$cookieStore',
+    function ($scope, $rootScope, $location, $http, $window, $cookieStore) {
         $scope.login = function () {
             var authdata = btoa($scope.username +":"+ $scope.password)
-            $http.get('api', {
+            $http.get('/api/users', {
                 headers: {
                     'Authorization': 'Basic '+authdata
                 }
             }).then(function successCallback(response){
-                console.log(response);
+                $cookieStore.put("user", response.data[0]);
                 $window.location.assign("/");
                 console.log("Change!");
             },
