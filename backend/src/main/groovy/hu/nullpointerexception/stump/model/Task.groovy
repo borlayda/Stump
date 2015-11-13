@@ -1,9 +1,11 @@
 package hu.nullpointerexception.stump.model
 
+import org.springframework.data.mongodb.core.mapping.DBRef
+
 class Task extends Entity {
 
     String title
-    User owner
+    @DBRef User owner
     Project project
     String description
     Status.Task status
