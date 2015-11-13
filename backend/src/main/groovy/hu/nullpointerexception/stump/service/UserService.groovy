@@ -1,6 +1,8 @@
 package hu.nullpointerexception.stump.service
 
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
+import hu.nullpointerexception.stump.exception.EntityNotFoundException
+import hu.nullpointerexception.stump.exception.StumpException
 import hu.nullpointerexception.stump.model.User
 import hu.nullpointerexception.stump.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -42,6 +44,18 @@ class UserService {
             throw new EntityAlreadyExistsException(e);
         }
 
+    }
+
+    def changePassword(String userId, String oldPassword, String newPassword) {
+        def user = userRepository.findOne(userId)
+        if (user == null) {
+            throw new EntityNotFoundException("User not found.")
+        }
+        if (!passwordEncoder.matches(oldPassword, user.password)) {
+            throw new StumpException("Old password is incorrect.")
+        }
+        user.password = passwordEncoder.encode(newPassword)
+        userRepository.save(user)
     }
 
 }

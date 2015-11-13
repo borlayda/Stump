@@ -1,6 +1,8 @@
 package hu.nullpointerexception.stump.controller
 
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
+import hu.nullpointerexception.stump.exception.EntityNotFoundException
+import hu.nullpointerexception.stump.exception.StumpException
 import hu.nullpointerexception.stump.service.UserService
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.UserJSONEntity
@@ -34,10 +36,35 @@ class UserController {
         return GenericResponse.okResponse()
     }
 
+    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
+    GenericResponse changePassword(@RequestBody ChangePasswordRequest cpr) {
+        userService.changePassword(cpr.userId, cpr.oldPassword, cpr.newPassword)
+        return GenericResponse.okResponse()
+    }
+
+
+    @ExceptionHandler(StumpException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    def handleStumpException(Exception e) {
+        return new GenericResponse("ERROR", e.getMessage())
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    def handleEntityNotFound(Exception e) {
+        return new GenericResponse("ERROR", "Entity not found: " + e.getMessage())
+    }
+
     @ExceptionHandler(EntityAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     def handleEntityAlreadyExists() {
         return new GenericResponse("ERROR", "Entity already exists.");
+    }
+
+    private static class ChangePasswordRequest {
+        String userId
+        String oldPassword
+        String newPassword
     }
 
 }
