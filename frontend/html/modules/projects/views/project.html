@@ -1,0 +1,35 @@
+<div class="project" ng-controller="ProjectController">
+    <div class="projectProperties">
+        <h1>{{selProject.title}}</h1>
+        <p>{{selProject.description}}</p>
+        <h2>Users on this project:</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Role</th>
+            </tr>
+            <tr ng-repeat="user in selProject.users">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+            </tr>
+        </table>
+        <h2>Project's tasks:</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Status</th>
+            </tr>
+            <tr ng-repeat="task in selProject.tasks">
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.owner.name}}</td>
+                <td>{{task.status}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>

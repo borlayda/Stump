@@ -2,9 +2,10 @@
 
 angular.module('Project', ['ngCookies'])
 .controller('ProjectController',
-    ['$scope', '$rootScope', '$location', '$http',
-    function ($scope, $rootScope, $location, $http) {
-        $scope.projects = []
+    ['$scope', '$rootScope', '$location', '$http', '$cookies',
+    function ($scope, $rootScope, $location, $http, $cookies) {
+        $scope.selProject = $cookies.getObject('selProject');
+        $scope.projects = [];
         $http.get('/api/projects').then(function successCallback(response){
             $scope.projects = response.data;
         },
@@ -27,6 +28,12 @@ angular.module('Project', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             });
+        }
+
+        // Get specific project
+        $scope.getProject = function (project) {
+            $cookies.put("selProject", JSON.stringify(project));
+            $scope.switchActivePart('projects', 'project');
         }
 
         // Create user
