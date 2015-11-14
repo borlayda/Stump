@@ -7,6 +7,8 @@ angular.module('Dashboard', []);
 angular.module('BasicHttpAuthExample', [
     'Authentication',
     'Dashboard',
+    'User',
+    'Settings',
     'ngRoute',
     'ngCookies'
 ])
