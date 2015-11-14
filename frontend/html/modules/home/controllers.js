@@ -22,12 +22,16 @@ angular.module('Dashboard', ['ngCookies'])
             console.log($scope.users);
         }
         $scope.addUser = function(name, password, email, role) {
-            console.log("User added "+name+" "+password);
+            console.log("User added "+name+" "+password+" "+email+" "+role);
             $http.post('/api/users', {
                 "name": name,
                 "password": password,
                 "email": email,
                 "role": role
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }).then(function successCallback(response){
                 $scope.users = response.data[0];
             },

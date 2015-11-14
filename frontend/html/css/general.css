@@ -21,3 +21,10 @@ html {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.loginWindow {
+    width: 500px;
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+}
