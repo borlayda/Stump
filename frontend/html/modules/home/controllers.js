@@ -46,6 +46,12 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.addUserWindow = function (){
             $('#registerUser').modal('show');
         }
+        $scope.addChangePasswordWindow = function (){
+            $('#changePassword').modal('show');
+        }
+        $scope.addChangeRoleWindow = function (){
+            $('#changeRole').modal('show');
+        }
         $scope.logout = function () {
              console.log($scope.user.name);
              console.log("Logging out ...");

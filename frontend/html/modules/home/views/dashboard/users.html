@@ -37,8 +37,12 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn" ng-click="addUser(name, password, email, role);">Add user</button><br/>
-                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div style="float: left">
+                        <button class="btn pull-left" ng-click="addUser(name, password, email, role);" data-dismiss="modal">Add user</button><br/>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn pull-right" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
 
         </div>
