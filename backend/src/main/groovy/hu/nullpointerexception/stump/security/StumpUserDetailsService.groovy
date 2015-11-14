@@ -27,6 +27,7 @@ class StumpUserDetailsService implements UserDetailsService {
         if (userRepository.findByName("admin") == null) {
             def user = new User()
             user.name = "admin"
+            user.email = "admin@stump.com"
             user.password = passwordEncoder.encode("admin")
             user.role = Role.ADMIN
             userRepository.save(user)
