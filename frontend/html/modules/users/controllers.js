@@ -4,6 +4,7 @@ angular.module('User', ['ngCookies'])
 .controller('UserController',
     ['$scope', '$rootScope', '$location', '$http',
     function ($scope, $rootScope, $location, $http) {
+        $scope.selId = "";
         $scope.users = [];
         $http.get('/api/users').then(function successCallback(response){
             $scope.users = response.data;
@@ -66,9 +67,52 @@ angular.module('User', ['ngCookies'])
             });
         }
 
+        // Change password
+        $scope.changePassword = function(id, oldPassword, newPassword) {
+            $http.post('/api/users/change-password', {
+                'id':id,
+                'oldPassword': oldPassword,
+                'newPassword': newPassword
+            },{
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                console.log("Password changed!");
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
+        // Change role
+        $scope.changeRole = function(id, newRole) {
+            $http.post('/api/users/change-role', {
+                'id':id,
+                'role': newRole
+            },{
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                console.log("Role changed!");
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
         // Modal Windows
         $scope.addUserWindow = function (){
             $('#registerUser').modal('show');
+        }
+        $scope.addChangePasswordWindow = function (user){
+            $scope.selId = user.id;
+            $('#changePassword').modal('show');
+        }
+        $scope.addChangeRoleWindow = function (user){
+            $scope.selId = user.id;
+            $('#changeRole').modal('show');
         }
     }
 ]);

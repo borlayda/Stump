@@ -12,6 +12,41 @@ angular.module('Settings', ['ngCookies'])
             console.error(response);
         });
 
+        // Change password
+        $scope.changePassword = function(id, oldPassword, newPassword) {
+            $http.post('/api/users/change-password', {
+                'id':id,
+                'oldPassword': oldPassword,
+                'newPassword': newPassword
+            },{
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                console.log("Password changed!");
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
+        // Change role
+        $scope.changeRole = function(id, newRole) {
+            $http.post('/api/users/change-role', {
+                'id':id,
+                'role': newRole
+            },{
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                console.log("Role changed!");
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
         // Modal Windows
         $scope.addChangePasswordWindow = function (){
             $('#changePassword').modal('show');
