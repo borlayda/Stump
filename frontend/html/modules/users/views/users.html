@@ -1,4 +1,4 @@
-<div class="users">
+<div class="users" ng-controller="UserController">
     <div class="userList">
         <h1>Users</h1>
         <table class="table table-striped">
@@ -6,11 +6,13 @@
                 <th>Name</th>
                 <th>E-mail</th>
                 <th>Role</th>
+                <th>Delete</th>
             </tr>
             <tr ng-repeat="user in users">
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.role}}</td>
+                <td><button class="btn" ng-click="deleteUser(user);">Delete</button></td>
             </tr>
         </table>
     </div>
