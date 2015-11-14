@@ -1,17 +1,11 @@
 'use strict';
 
-angular.module('Dashboard', ['ngCookies'])
-.controller('DashboardController',
-    ['$scope', '$rootScope', '$location', '$cookies', '$window', '$http',
-    function ($scope, $rootScope, $location, $cookies, $window, $http) {
-        $scope.dashboardPartActive = 'projects';
-        $scope.user = JSON.parse($cookies.get("user"));
+angular.module('User', ['ngCookies'])
+.controller('UserController',
+    ['$scope', '$rootScope', '$location', '$http',
+    function ($scope, $rootScope, $location, $http) {
 
-        $scope.switchActivePart = function($scope, partName) {
-            console.log("Dashboard changed: Part = " + partName);
-
-            $scope.dashboardPartActive = patName;
-        }
+        // Get all users
         $scope.getUsers = function () {
             $http.get('/api/users').then(function successCallback(response){
                 $scope.users = response.data;
@@ -20,6 +14,8 @@ angular.module('Dashboard', ['ngCookies'])
                 console.error(response);
             });
         }
+
+        // Create user
         $scope.addUser = function(name, password, email, role) {
             $http.post('/api/users', {
                 "name": name,
@@ -41,21 +37,31 @@ angular.module('Dashboard', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             });
-
         }
+
+        // Delete user
+        $scope.deleteUser = function(name) {
+            $http.delete('/api/users', {
+                "name": name
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                $scope.users.foreach(function (data, value){
+                    if (data['name'] === name) {
+                        $scope.users.splice(index, 1);
+                    }
+                });
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
+        // Modal Windows
         $scope.addUserWindow = function (){
             $('#registerUser').modal('show');
-        }
-        $scope.addChangePasswordWindow = function (){
-            $('#changePassword').modal('show');
-        }
-        $scope.addChangeRoleWindow = function (){
-            $('#changeRole').modal('show');
-        }
-        $scope.logout = function () {
-             console.log($scope.user.name);
-             console.log("Logging out ...");
-             $window.location.assign("/#/login");
         }
     }
 ]);

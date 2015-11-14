@@ -1,0 +1,75 @@
+<div class="settings">
+    <div class="userSettings">
+        <h1>Settings</h1>
+        <ul>
+            <li>Name: {{loginUser.name}}</li>
+            <li>E-mail: {{loginUser.email}}</li>
+            <li>Role: {{loginUser.role}}</li>
+        </ul>
+    </div>
+
+    <button class="btn btn-lg" ng-click="addChangePasswordWindow();">Change Password</button>
+    <button class="btn btn-lg" ng-click="addChangeRoleWindow();">Change Role</button>
+
+    <!-- Change Password Modal Window -->
+    <div id="changePassword" class="modal fade" data-toogle="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change user password</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        Old password: <input type="text" ng-model="oldPassword"><br/>
+                        New password: <input type="text" ng-model="newPassword"><br/>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <div style="float: left">
+                        <button class="btn pull-left" ng-click="changePassword(name, oldPassword, newPassword);" data-dismiss="modal">Change</button><br/>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Role Modal Window -->
+    <div id="changeRole" class="modal fade" data-toogle="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change user password</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        Role: <select ng-model="newRole">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="PM">PM</option>
+                            <option value="DEVELOPER" selected>DEVELOPER</option>
+                            <option value="TESTER">TESTER</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <div style="float: left">
+                        <button class="btn pull-left" ng-click="changeRole(name, newRole);" data-dismiss="modal">Change</button><br/>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -58,12 +58,12 @@
               <a ng-click="dashboardPartActive = 'settings'">Settings</a>
             </li>
             <li>
-              <a ng-click="dashboardPartActive = 'users'">Users</a>
+              <a ng-click="dashboardPartActive = 'users'; getUsers();">Users</a>
             </li>
           </ul>
         </div>
         <div class="main slide-animate-container col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 inside inside-full-height no-float">
-          <div class="slide-animate" ng-include src="'modules/home/views/dashboard/'+dashboardPartActive+'.html'"></div>
+          <div class="slide-animate" ng-include src="'modules/'+dashboardPartActive+'/views/'+dashboardPartActive+'.html'"></div>
         </div>
       </div>
     </div>
