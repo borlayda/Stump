@@ -1,13 +1,17 @@
 package hu.nullpointerexception.stump.controller
 
+import com.mongodb.DuplicateKeyException
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.exception.StumpException
+import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.UserService
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.UserJSONEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -34,6 +38,13 @@ class UserController {
         new UserJSONEntity(userService.getUser(userId))
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "me")
+    UserJSONEntity getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        def principal = auth.getPrincipal() as StumpPrincipal
+        new UserJSONEntity(userService.getUser(principal.user.id))
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     GenericResponse addUser(@RequestBody UserJSONEntity userJSONObject) throws EntityAlreadyExistsException {
         def user = userJSONObject.createNewEntity()
@@ -55,7 +66,7 @@ class UserController {
 
 
     @ExceptionHandler(StumpException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     def handleStumpException(Exception e) {
         return new GenericResponse("ERROR", e.getMessage())
     }
@@ -66,7 +77,7 @@ class UserController {
         return new GenericResponse("ERROR", "Entity not found: " + e.getMessage())
     }
 
-    @ExceptionHandler(EntityAlreadyExistsException.class)
+    @ExceptionHandler([EntityAlreadyExistsException.class, DuplicateKeyException.class])
     @ResponseStatus(HttpStatus.CONFLICT)
     def handleEntityAlreadyExists() {
         return new GenericResponse("ERROR", "Entity already exists.");

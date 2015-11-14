@@ -40,10 +40,6 @@ class StumpUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found.")
         }
-        new org.springframework.security.core.userdetails.User(
-                user.name,
-                user.password,
-                [new SimpleGrantedAuthority(user.role.name())]
-        )
+        new StumpPrincipal(user, [new SimpleGrantedAuthority(user.role.name())])
     }
 }

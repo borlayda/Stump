@@ -8,7 +8,7 @@ class Task extends Entity {
     @DBRef User owner
     Project project
     String description
-    Status.Task status
+    TaskStatus status
     List<Comment> comments
 
     Task(String title, User owner, String description, Project project) {
@@ -16,7 +16,7 @@ class Task extends Entity {
         this.owner = owner
         this.description = description
         this.project = project
-        this.status = Status.Task.OPEN
+        this.status = TaskStatus.OPEN
     }
 
     def addComment(String text, User author) {
@@ -27,7 +27,7 @@ class Task extends Entity {
         this.owner = newOwner
     }
 
-    def changeStatus(Status.Task status) {
+    def changeStatus(TaskStatus status) {
         this.status = status
     }
 
