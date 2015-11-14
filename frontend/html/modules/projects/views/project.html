@@ -32,4 +32,33 @@
         </table>
     </div>
 
+    <button class="btn btn-info btn-lg" ng-click="addCreateTaskWindow();">Create Task</button><br/>
+    <div id="createTask" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create new task</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        Project: {{selProject.title}}<br/>
+                        Title: <input type="text" ng-model="title"/><br/>
+                        Description: <textarea ng-model="description"></textarea><br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div style="float: left">
+                        <button class="btn pull-left" ng-click="createTask(title, description, selProject.id);" data-dismiss="modal">Create Task</button><br/>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
