@@ -12,7 +12,6 @@ angular.module('Dashboard', ['ngCookies'])
             $scope.dashboardHTMLActive = html;
         }
         $scope.logout = function () {
-             console.log($scope.user.name);
              console.log("Logging out ...");
              $window.location.assign("/#/login");
         }
