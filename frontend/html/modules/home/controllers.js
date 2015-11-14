@@ -14,7 +14,7 @@ angular.module('Dashboard', ['ngCookies'])
         }
         $scope.getUsers = function () {
             $http.get('/api/users').then(function successCallback(response){
-                $scope.users = response.data[0];
+                $scope.users = response.data;
             },
             function errorCallback(response){
                 console.error(response);

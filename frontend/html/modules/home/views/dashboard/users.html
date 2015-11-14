@@ -1,9 +1,18 @@
 <div class="users">
     <div class="userList">
         Users:
-        <ul>
-            <li ng-repeat="user in $scope.users">{{user.name}}</li>
-        </ul>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Role</th>
+            </tr>
+            <tr ng-repeat="user in users">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+            </tr>
+        </table>
     </div>
     <form>
         Add new user<br/>
