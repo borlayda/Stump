@@ -1,6 +1,6 @@
 <div class="users">
     <div class="userList">
-        Users:
+        <h1>Users</h1>
         <table class="table table-striped">
             <tr>
                 <th>Name</th>
@@ -14,17 +14,34 @@
             </tr>
         </table>
     </div>
-    <form>
-        Add new user<br/>
-        Username: <input type="text" ng-model="name"/><br/>
-        Password: <input type="password" ng-model="password"/><br/>
-        E-mail: <input type="text" ng-model="email"/><br/>
-        Role: <select ng-model="role">
-            <option value="ADMIN">ADMIN</option>
-            <option value="PM">PM</option>
-            <option value="DEVELOPER" selected>DEVELOPER</option>
-            <option value="TESTER">TESTER</option>
-        </select><br/>
-        <button class="btn" ng-click="addUser(name, password, email, role);">Add user</button><br/>
-    </form>
+    <button class="btn btn-info btn-lg" ng-click="addUserWindow();">Register</button><br/>
+    <div id="registerUser" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create new user</h4>
+            </div>
+
+                <div class="modal-body">
+                    <form>
+                        Username: <input type="text" ng-model="name"/><br/>
+                        Password: <input type="password" ng-model="password"/><br/>
+                        E-mail: <input type="text" ng-model="email"/><br/>
+                        Role: <select ng-model="role">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="PM">PM</option>
+                            <option value="DEVELOPER" selected>DEVELOPER</option>
+                            <option value="TESTER">TESTER</option>
+                        </select><br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" ng-click="addUser(name, password, email, role);">Add user</button><br/>
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
+        </div>
+        </div>
+    </div>
 </div>

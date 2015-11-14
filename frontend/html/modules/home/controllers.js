@@ -19,10 +19,8 @@ angular.module('Dashboard', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             });
-            console.log($scope.users);
         }
         $scope.addUser = function(name, password, email, role) {
-            console.log("User added "+name+" "+password+" "+email+" "+role);
             $http.post('/api/users', {
                 "name": name,
                 "password": password,
@@ -33,11 +31,20 @@ angular.module('Dashboard', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.users = response.data[0];
+                $scope.users.push({
+                    "name": name,
+                    "password": password,
+                    "email": email,
+                    "role": role
+                });
             },
             function errorCallback(response){
                 console.error(response);
             });
+
+        }
+        $scope.addUserWindow = function (){
+            $('#registerUser').modal('show');
         }
         $scope.logout = function () {
              console.log($scope.user.name);

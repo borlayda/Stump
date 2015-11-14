@@ -72,15 +72,6 @@ body {
 
 .main {
   padding: 20px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0d230+0,805b1a+100 */
-background: #e0d230; /* Old browsers */
-background: -moz-linear-gradient(top, #e0d230 0%, #805b1a 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e0d230), color-stop(100%,#805b1a)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, #e0d230 0%,#805b1a 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, #e0d230 0%,#805b1a 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, #e0d230 0%,#805b1a 100%); /* IE10+ */
-background: linear-gradient(to bottom, #e0d230 0%,#805b1a 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0d230', endColorstr='#805b1a',GradientType=0 ); /* IE6-9 */
 }
 @media (min-width: 768px) {
   .main {
