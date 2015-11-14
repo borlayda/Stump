@@ -1,0 +1,35 @@
+<div class="project" ng-controller="TaskController">
+    <div class="projectProperties">
+        <h1>{{selTask.title}}</h1>
+        <p>{{selTask.description}}</p>
+        <h2>Users on this task:</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Role</th>
+            </tr>
+            <tr ng-repeat="user in selTask.users">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+            </tr>
+        </table>
+        <h2>Task's comments:</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Status</th>
+            </tr>
+            <tr ng-repeat="comment in selTask.comments">
+                <td>{{comment.title}}</td>
+                <td>{{comment.description}}</td>
+                <td>{{comment.owner.name}}</td>
+                <td>{{comment.status}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>

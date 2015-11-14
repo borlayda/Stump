@@ -10,6 +10,7 @@ angular.module('BasicHttpAuthExample', [
     'User',
     'Settings',
     'Project',
+    'Task',
     'ngRoute',
     'ngCookies'
 ])
