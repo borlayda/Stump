@@ -10,7 +10,7 @@
                 <th>Change Password</th>
                 <th>Change Role</th>
             </tr>
-            <tr ng-repeat="user in users">
+            <tr ng-repeat="user in users | orderBy:'+name'">
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.role}}</td>
