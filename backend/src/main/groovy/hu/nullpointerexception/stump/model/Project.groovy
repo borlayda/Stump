@@ -10,6 +10,7 @@ class Project extends Entity {
     @Indexed(unique = true)
     String title
     String description
+    @DBRef(lazy = true)
     User owner
     ProjectStatus status
     List<Task> tasks
@@ -23,6 +24,8 @@ class Project extends Entity {
     }
 
     Project() {
+        this.users = new ArrayList<>()
+        this.tasks = new ArrayList<>()
     }
 
     def addTask(String title, User owner, String description) {

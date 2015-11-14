@@ -6,7 +6,6 @@ class Task extends Entity {
 
     String title
     @DBRef User owner
-    Project project
     String description
     TaskStatus status
     List<Comment> comments
