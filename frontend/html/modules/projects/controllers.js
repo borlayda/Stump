@@ -20,16 +20,6 @@ angular.module('Project', ['ngCookies'])
             console.error(response);
         });
 
-        // Get all users
-        $scope.getProjects = function () {
-            $http.get('/api/projects').then(function successCallback(response){
-                $scope.projects = response.data;
-            },
-            function errorCallback(response){
-                console.error(response);
-            });
-        }
-
         // Get specific project
         $scope.getProject = function (project) {
             $cookies.put("selProject", JSON.stringify(project));
@@ -82,6 +72,12 @@ angular.module('Project', ['ngCookies'])
 
         // Modal Windows
         $scope.addCreateProjectWindow = function (){
+            $http.get('/api/projects').then(function successCallback(response){
+                $scope.projects = response.data;
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
             $('#createProject').modal('show');
         }
     }

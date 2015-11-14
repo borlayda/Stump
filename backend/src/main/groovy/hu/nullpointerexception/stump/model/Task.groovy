@@ -1,21 +1,29 @@
 package hu.nullpointerexception.stump.model
 
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.DBRef
 
 class Task extends Entity {
 
+    @Indexed(unique = true)
     String title
-    @DBRef User owner
+    @DBRef(lazy = true)
+    User owner
+    @DBRef(lazy = true)
+    Project project;
     String description
     TaskStatus status
+    @DBRef(lazy = true)
     List<Comment> comments
 
-    Task(String title, User owner, String description, Project project) {
+    Task(String title, String description) {
         this.title = title
-        this.owner = owner
         this.description = description
-        this.project = project
         this.status = TaskStatus.OPEN
+    }
+
+    Task() {
+        this.comments = new ArrayList<>()
     }
 
     def addComment(String text, User author) {

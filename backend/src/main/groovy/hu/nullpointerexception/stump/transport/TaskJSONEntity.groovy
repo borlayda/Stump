@@ -1,0 +1,49 @@
+package hu.nullpointerexception.stump.transport
+
+import com.fasterxml.jackson.annotation.JsonInclude
+import hu.nullpointerexception.stump.model.Project
+import hu.nullpointerexception.stump.model.Task
+import hu.nullpointerexception.stump.model.TaskStatus
+import hu.nullpointerexception.stump.model.Task
+import hu.nullpointerexception.stump.model.TaskStatus
+
+/**
+ * Created by Márton Tóth
+ */
+class TaskJSONEntity extends JSONEntity<Task> {
+
+    String id
+    String title
+    String description
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String ownerId
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UserJSONEntity owner
+    TaskStatus status
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String projectId
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    ProjectJSONEntity project
+
+    TaskJSONEntity(Task source) {
+        super(source)
+        id = source.id
+        title = source.title
+        description = source.description
+        owner = new UserJSONEntity(source.owner)
+        status = source.status
+        project = new ProjectJSONEntity(source.project)
+    }
+
+    TaskJSONEntity() {
+    }
+
+    @Override
+    Task createNewEntity() {
+        def task = new Task(title, description)
+        if (status != null) {
+            task.status = status
+        }
+        return task
+    }
+}

@@ -5,6 +5,7 @@ angular.module('Task', ['ngCookies'])
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
         $scope.selTask = $cookies.getObject('selTask');
+        $scope.projects = [];
         $scope.tasks = [];
         $http.get('/api/tasks').then(function successCallback(response){
             $scope.tasks = response.data;
@@ -36,14 +37,25 @@ angular.module('Task', ['ngCookies'])
             $scope.switchActivePart('tasks', 'task');
         }
 
+        // Get all users
+        $scope.getProjects = function () {
+            $http.get('/api/projects').then(function successCallback(response){
+                $scope.projects = response.data;
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
         // Create user
-        $scope.createTask = function(title, description) {
+        $scope.createTask = function(title, description, projectId) {
             console.log($scope.loginUser);
             console.log($scope.tasks);
             $http.post('/api/tasks', {
                 "title": title,
                 "description": description,
                 "ownerId": $scope.loginUser.id,
+                "projectId": projectId,
                 "status": 'OPEN'
             }, {
                 headers: {
@@ -54,6 +66,7 @@ angular.module('Task', ['ngCookies'])
                     "title": title,
                     "description": description,
                     "ownerId": $scope.loginUser.id,
+                    "projectId": projectId,
                     "status": 'OPEN'
                 });
             },

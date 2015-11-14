@@ -13,6 +13,7 @@ class Project extends Entity {
     @DBRef(lazy = true)
     User owner
     ProjectStatus status
+    @DBRef(lazy = true)
     List<Task> tasks
     @DBRef(lazy = true)
     List<User> users

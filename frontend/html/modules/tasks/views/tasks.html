@@ -6,6 +6,7 @@
                 <th>Title</th>
                 <th>Owner</th>
                 <th>Description</th>
+                <th>Project</th>
                 <th>Status</th>
                 <th>Delete</th>
             </tr>
@@ -13,6 +14,7 @@
                 <td><a ng-click="getTask(task);">{{task.title}}</a></td>
                 <td>{{task.owner.name}}</td>
                 <td>{{task.description}}</td>
+                <td>{{task.project.title}}</td>
                 <td>{{task.status}}</td>
                 <td><button class="btn" ng-click="deleteTask(project);">Delete</button></td>
             </tr>
@@ -29,13 +31,16 @@
 
                 <div class="modal-body">
                     <form>
+                        Project: <select ng-model="projectId" ng-init="getProjects();">
+                            <option ng-repeat="project in projects" value="{{project.id}}">{{project.title}}</option>
+                        </select><br/>
                         Title: <input type="text" ng-model="title"/><br/>
                         Description: <textarea ng-model="description"></textarea><br/>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="createTask(title, description); getTasks();" data-dismiss="modal">Create Task</button><br/>
+                        <button class="btn pull-left" ng-click="createTask(title, description, projectId); getTasks();" data-dismiss="modal">Create Task</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>
