@@ -14,7 +14,7 @@ angular.module('Authentication')
             }).then(function successCallback(response){
                 $cookieStore.put("user", response.data[0]);
                 $window.location.assign("/");
-                console.log("Change!");
+                console.log(response.data[0].name + " logged in");
             },
             function errorCallback(response){
                 console.error(response);

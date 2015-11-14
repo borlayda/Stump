@@ -1,11 +1,48 @@
-<div class="projects">
+<div class="projects" ng-controller="ProjectController">
     <div class="projectList">
-        Projects:
-        <ul>
-            <li><a src="/tasks">Example Project</a></li>
-        </ul>
+        <h1>Projects</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>Title</th>
+                <th>Owner</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Delete</th>
+            </tr>
+            <tr ng-repeat="project in projects">
+                <td>{{project.title}}</td>
+                <td>{{project.owner.name}}</td>
+                <td>{{project.description}}</td>
+                <td>{{project.status}}</td>
+                <td><button class="btn" ng-click="deleteProject(project);" ng-if="project.status == 'CLOSED'">Delete</button></td>
+            </tr>
+        </table>
     </div>
-    <form>
-        <button class="btn">Add project</button>
-    </form>
+    <button class="btn btn-info btn-lg" ng-click="addCreateProjectWindow();">Create Project</button><br/>
+    <div id="createProject" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create new project</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        Title: <input type="text" ng-model="title"/><br/>
+                        Description: <textarea ng-model="description"></textarea><br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div style="float: left">
+                        <button class="btn pull-left" ng-click="createProject(title, description); getProjects();" data-dismiss="modal">Create Project</button><br/>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

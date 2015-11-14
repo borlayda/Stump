@@ -9,6 +9,7 @@ angular.module('BasicHttpAuthExample', [
     'Dashboard',
     'User',
     'Settings',
+    'Project',
     'ngRoute',
     'ngCookies'
 ])
