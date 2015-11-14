@@ -31,6 +31,7 @@ class UserJSONEntity extends JSONEntity<User> {
         retVal.name = name
         retVal.password = password
         retVal.role = role
+        retVal.email = email
         return retVal
     }
 }
