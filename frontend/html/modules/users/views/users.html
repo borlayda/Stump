@@ -36,12 +36,9 @@
                         Username: <input type="text" ng-model="name"/><br/>
                         Password: <input type="password" ng-model="password"/><br/>
                         E-mail: <input type="text" ng-model="email"/><br/>
-                        Role: <select ng-model="role">
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="PM">PM</option>
-                            <option value="DEVELOPER" selected>DEVELOPER</option>
-                            <option value="TESTER">TESTER</option>
-                        </select><br/>
+                        Role: <select ng-init="role = 'TESTER'"
+                              ng-options="roles for roles in USER_ROLES"
+                              ng-model="role"></select><br/>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -76,7 +73,7 @@
 
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="changePassword(selId, oldPassword, newPassword);" data-dismiss="modal">Change</button><br/>
+                        <button class="btn pull-left" ng-click="changePassword(selUser.id, oldPassword, newPassword);" data-dismiss="modal">Change</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>
@@ -98,18 +95,15 @@
 
                 <div class="modal-body">
                     <form>
-                        Role: <select ng-model="newRole">
-                        <option value="ADMIN">ADMIN</option>
-                        <option value="PM">PM</option>
-                        <option value="DEVELOPER" selected>DEVELOPER</option>
-                        <option value="TESTER">TESTER</option>
-                    </select>
+                        Role: <select ng-init="newRole = selUser.role"
+                            ng-options="role for role in USER_ROLES"
+                            ng-model="newRole"></select>
                     </form>
                 </div>
 
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="changeRole(selId, newRole);" data-dismiss="modal">Change</button><br/>
+                        <button class="btn pull-left" ng-click="changeRole(selUser.id, newRole);" data-dismiss="modal">Change</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>

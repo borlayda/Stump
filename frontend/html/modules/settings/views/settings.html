@@ -52,12 +52,9 @@
 
                 <div class="modal-body">
                     <form>
-                        Role: <select ng-model="newRole">
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="PM">PM</option>
-                            <option value="DEVELOPER" selected>DEVELOPER</option>
-                            <option value="TESTER">TESTER</option>
-                        </select>
+                        Role: <select ng-init="newRole = loginUser.role"
+                              ng-options="role for role in USER_ROLES"
+                              ng-model="newRole"></select>
                     </form>
                 </div>
 

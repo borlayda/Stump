@@ -4,7 +4,7 @@ angular.module('User', ['ngCookies'])
 .controller('UserController',
     ['$scope', '$rootScope', '$location', '$http',
     function ($scope, $rootScope, $location, $http) {
-        $scope.selId = "";
+        $scope.selUser = {};
 
         // Create user
         $scope.addUser = function(name, password, email, role) {
@@ -90,11 +90,11 @@ angular.module('User', ['ngCookies'])
             $('#registerUser').modal('show');
         }
         $scope.addChangePasswordWindow = function (user){
-            $scope.selId = user.id;
+            $scope.selUser = user;
             $('#changePassword').modal('show');
         }
         $scope.addChangeRoleWindow = function (user){
-            $scope.selId = user.id;
+            $scope.selUser = user;
             $('#changeRole').modal('show');
         }
     }
