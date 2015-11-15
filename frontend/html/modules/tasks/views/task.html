@@ -19,7 +19,8 @@
         <div ng-repeat="comment in selTask.comments">
             <div class="modal-content">
                 <div class="modal-header">
-                    {{comment.author.name}}:
+                    <div style="float: left">{{comment.author.name}}:</div>
+                    <div style="float: right">{{comment.date}}:</div>
                 </div>
                 <div class="modal-body">
                     {{comment.text}}
