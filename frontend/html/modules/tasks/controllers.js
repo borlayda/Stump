@@ -5,46 +5,11 @@ angular.module('Task', ['ngCookies'])
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
         $scope.selTask = $cookies.getObject('selTask');
-        $scope.projects = [];
-        $scope.tasks = [];
-        $http.get('/api/tasks').then(function successCallback(response){
-            $scope.tasks = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
-        $scope.loginUser = {}
-        $http.get('/api/users/me').then(function successCallback(response){
-            $scope.loginUser = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
-
-        // Get all users
-        $scope.getTasks = function () {
-            $http.get('/api/tasks').then(function successCallback(response){
-                $scope.tasks = response.data;
-            },
-            function errorCallback(response){
-                console.error(response);
-            });
-        }
 
         // Get specific task
         $scope.getTask = function (task) {
             $cookies.put("selTask", JSON.stringify(task));
             $scope.switchActivePart('tasks', 'task');
-        }
-
-        // Get all users
-        $scope.getProjects = function () {
-            $http.get('/api/projects').then(function successCallback(response){
-                $scope.projects = response.data;
-            },
-            function errorCallback(response){
-                console.error(response);
-            });
         }
 
         // Create user

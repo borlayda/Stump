@@ -5,20 +5,6 @@ angular.module('Project', ['ngCookies'])
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
         $scope.selProject = $cookies.getObject('selProject');
-        $scope.projects = [];
-        $http.get('/api/projects').then(function successCallback(response){
-            $scope.projects = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
-        $scope.loginUser = {}
-        $http.get('/api/users/me').then(function successCallback(response){
-            $scope.loginUser = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
 
         // Get specific project
         $scope.getProject = function (project) {

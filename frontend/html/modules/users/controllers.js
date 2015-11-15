@@ -5,23 +5,6 @@ angular.module('User', ['ngCookies'])
     ['$scope', '$rootScope', '$location', '$http',
     function ($scope, $rootScope, $location, $http) {
         $scope.selId = "";
-        $scope.users = [];
-        $http.get('/api/users').then(function successCallback(response){
-            $scope.users = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
-
-        // Get all users
-        $scope.getUsers = function () {
-            $http.get('/api/users').then(function successCallback(response){
-                $scope.users = response.data;
-            },
-            function errorCallback(response){
-                console.error(response);
-            });
-        }
 
         // Create user
         $scope.addUser = function(name, password, email, role) {
