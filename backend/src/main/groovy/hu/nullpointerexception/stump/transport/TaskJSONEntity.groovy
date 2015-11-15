@@ -1,6 +1,7 @@
 package hu.nullpointerexception.stump.transport
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import hu.nullpointerexception.stump.model.Comment
 import hu.nullpointerexception.stump.model.Project
 import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.TaskStatus
@@ -23,7 +24,7 @@ class TaskJSONEntity extends JSONEntity<Task> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String projectId
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    ProjectJSONEntity project
+    List<CommentJSONEntity> comments
 
     TaskJSONEntity(Task source) {
         super(source)
@@ -32,7 +33,6 @@ class TaskJSONEntity extends JSONEntity<Task> {
         description = source.description
         owner = new UserJSONEntity(source.owner)
         status = source.status
-        project = new ProjectJSONEntity(source.project)
     }
 
     TaskJSONEntity() {

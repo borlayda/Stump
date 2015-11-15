@@ -5,6 +5,8 @@ import hu.nullpointerexception.stump.model.Comment
 import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.TaskStatus
 
+import java.text.SimpleDateFormat
+
 /**
  * Created by Márton Tóth
  */
@@ -12,21 +14,24 @@ class CommentJSONEntity extends JSONEntity<Comment> {
 
     String id
     String text
-    String date
+    Long timestamp
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String authorId
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UserJSONEntity author
-    String tasktId
-    TaskJSONEntity task
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String taskId
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String commentId
+    List<CommentJSONEntity> comments
 
     CommentJSONEntity(Comment source) {
         super(source)
         id = source.id
         text = source.text
-        date = source.date
+        timestamp = source.timestamp
         author = new UserJSONEntity(source.author)
-        task = new TaskJSONEntity(source.task)
+        comments = source.comments.collect {c -> new CommentJSONEntity(c)}
     }
 
     CommentJSONEntity() {
@@ -34,7 +39,9 @@ class CommentJSONEntity extends JSONEntity<Comment> {
 
     @Override
     Comment createNewEntity() {
-        def comment = new Comment(text)
+        def comment = new Comment()
+        comment.text = text
+        comment.timestamp = System.currentTimeMillis()
         return comment
     }
 }

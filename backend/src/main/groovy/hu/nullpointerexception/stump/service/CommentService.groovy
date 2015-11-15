@@ -29,23 +29,42 @@ class CommentService {
         this.commentRepository = commentRepository
     }
 
-    def addComment(Comment comment, String authorId, String taskId) {
+    def addCommentToTask(Comment comment, String authorId, String taskId) {
         def user = userRepository.findOne(authorId)
         if (user == null) {
-            throw new EntityNotFoundException("User with id '" + userId + "' not found.")
+            throw new EntityNotFoundException("User with id '" + authorId + "' not found.")
         }
         comment.author = user
         def task = taskRepository.findOne(taskId)
         if (task == null) {
             throw new EntityNotFoundException("Task with id '" + taskId + "' not found.")
         }
-        comment.task = task
         try {
-            return commentRepository.save(comment)
+            comment = commentRepository.save(comment)
         } catch (DuplicateKeyException e) {
             throw new EntityAlreadyExistsException(e)
         }
+        task.comments << comment
+        taskRepository.save(task)
+    }
 
+    def addCommentToComment(Comment comment, String authorId, String commentId) {
+        def user = userRepository.findOne(authorId)
+        if (user == null) {
+            throw new EntityNotFoundException("User with id '" + authorId + "' not found.")
+        }
+        comment.author = user
+        def parentComment = commentRepository.findOne(commentId)
+        if (parentComment == null) {
+            throw new EntityNotFoundException("Comment with id '" + commentId + "' not found.")
+        }
+        try {
+            comment = commentRepository.save(comment)
+        } catch (DuplicateKeyException e) {
+            throw new EntityAlreadyExistsException(e)
+        }
+        parentComment.comments << comment
+        commentRepository.save(parentComment)
     }
 
     def connectCommentAndUser(String commentId, String userId) {
@@ -95,4 +114,7 @@ class CommentService {
 
     }
 
+    def delete(String commentId) {
+        commentRepository.delete(commentId)
+    }
 }

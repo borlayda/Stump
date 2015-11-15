@@ -71,4 +71,7 @@ class ProjectService {
         return user.projects.toList()
     }
 
+    def getProject(String projectId) {
+        projectRepository.findOne(projectId)
+    }
 }

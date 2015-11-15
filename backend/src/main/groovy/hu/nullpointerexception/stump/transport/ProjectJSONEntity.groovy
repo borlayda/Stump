@@ -18,6 +18,8 @@ class ProjectJSONEntity extends JSONEntity<Project> {
     String ownerId
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UserJSONEntity owner
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<TaskJSONEntity> tasks
     ProjectStatus status
 
     ProjectJSONEntity(Project source) {

@@ -28,7 +28,23 @@ class CommentController {
 
     @RequestMapping(method = RequestMethod.POST)
     def addComment(@RequestBody CommentJSONEntity commentJSONEntity) {
-        commentService.addComment(commentJSONEntity.createNewEntity(), commentJSONEntity.authorId, commentJSONEntity.taskId)
+        if (commentJSONEntity.commentId == null) {
+            commentService.addCommentToTask(
+                    commentJSONEntity.createNewEntity(),
+                    commentJSONEntity.authorId,
+                    commentJSONEntity.taskId)
+        } else {
+            commentService.addCommentToComment(
+                    commentJSONEntity.createNewEntity(),
+                    commentJSONEntity.authorId,
+                    commentJSONEntity.commentId)
+        }
+        return GenericResponse.okResponse()
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{commentId}")
+    def addComment(@PathVariable("commentId") String commentId) {
+        commentService.delete(commentId)
         return GenericResponse.okResponse()
     }
 

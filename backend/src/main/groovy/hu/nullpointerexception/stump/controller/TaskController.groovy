@@ -3,14 +3,18 @@ package hu.nullpointerexception.stump.controller
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.exception.StumpException
+import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.TaskService
+import hu.nullpointerexception.stump.transport.CommentJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+
+import java.nio.file.Path
 
 /**
  * Created by Márton Tóth
@@ -33,8 +37,16 @@ class TaskController {
     }
 
     @RequestMapping
-    List<TaskJSONEntity> getAll(@AuthenticationPrincipal StumpPrincipal stumpPrincipal) {
-        taskService.getTasksForUser(stumpPrincipal.user.id).collect {u -> new TaskJSONEntity(u)}
+    List<TaskJSONEntity> getAll() {
+        taskService.getAll().collect {u -> new TaskJSONEntity(u)}
+    }
+
+    @RequestMapping("{taskId}")
+    TaskJSONEntity get(@PathVariable("taskId") String taskId) {
+        def task = taskService.getTask(taskId)
+        def taskJSONEntity = new TaskJSONEntity(task)
+        taskJSONEntity.comments = task.comments.collect {c -> new CommentJSONEntity(c)}
+        return taskJSONEntity
     }
 
     @ExceptionHandler(StumpException.class)

@@ -13,7 +13,7 @@ class Project extends Entity {
     @DBRef(lazy = true)
     User owner
     ProjectStatus status
-    @DBRef(lazy = true)
+    @DBRef
     List<Task> tasks
     @DBRef(lazy = true)
     List<User> users
@@ -27,14 +27,6 @@ class Project extends Entity {
     Project() {
         this.users = new ArrayList<>()
         this.tasks = new ArrayList<>()
-    }
-
-    def addTask(String title, User owner, String description) {
-        tasks.add(new Task(title, owner, description, this))
-    }
-
-    def changeStatus(ProjectStatus status) {
-        this.status = status
     }
 
 }

@@ -5,12 +5,16 @@ import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.Role
+import hu.nullpointerexception.stump.model.TaskStatus
 import hu.nullpointerexception.stump.repository.ProjectRepository
 import hu.nullpointerexception.stump.repository.TaskRepository
 import hu.nullpointerexception.stump.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.stereotype.Service
+
+import javax.annotation.PostConstruct
+import java.util.concurrent.ThreadPoolExecutor
 
 /**
  * Created by Márton Tóth
@@ -29,6 +33,15 @@ class TaskService {
         this.projectRepository = projectRepository
     }
 
+//    @PostConstruct
+//    def postConstruct() {
+//        def task = new Task()
+//        task.title = "Krumplipucolas"
+//        task.description = "Meg kell pucolni a taskokat"
+//        task.status = TaskStatus.OPEN;
+//        addTask(task, "5647435aabce860542707d73", "56478674abce5d43d49e0014")
+//    }
+
     def addTask(Task task, String userId, String projectId) {
         def user = userRepository.findOne(userId)
         if (user == null) {
@@ -39,67 +52,20 @@ class TaskService {
         if (project == null) {
             throw new EntityNotFoundException("Project with id '" + projectId + "' not found.")
         }
-        task.project = project
         try {
-            return taskRepository.save(task)
+            task = taskRepository.save(task)
         } catch (DuplicateKeyException e) {
             throw new EntityAlreadyExistsException(e)
         }
-
+        project.tasks.add(task)
+        projectRepository.save(project)
     }
 
-    def connectTaskAndUser(String taskId, String userId) {
-        def user = userRepository.findOne(userId)
-        def task = taskRepository.findOne(taskId)
-        if (user == null) {
-            throw new EntityNotFoundException("User not found.")
-        }
-        if (task == null) {
-            throw new EntityNotFoundException("Task not found")
-        }
-        user.tasks.add(task);
-        task.users.add(user);
-        // Manual "transactions" mongodb sucks. This doesn't really work btw.
-        user = userRepository.save(user)
-        try {
-            taskRepository.save(task)
-        } catch (Exception e) {
-            user.tasks.remove(task)
-            userRepository.save(user)
-            throw new DatabaseException("Could not save task.")
-        }
-
+    def getAll() {
+        taskRepository.findAll()
     }
 
-    def getTasksForUser(String userId) {
-        def user = userRepository.findOne(userId)
-        if (user.role == Role.ADMIN) {
-            return taskRepository.findAll()
-        }
-        return user.tasks.toList()
+    def getTask(String taskId) {
+        taskRepository.findOne(taskId)
     }
-
-    def connectTaskAndProject(String taskId, String projectId) {
-        def project = projectRepository.findOne(projectId)
-        def task = taskRepository.findOne(taskId)
-        if (project == null) {
-            throw new EntityNotFoundException("Project not found.")
-        }
-        if (task == null) {
-            throw new EntityNotFoundException("Task not found")
-        }
-        project.tasks.add(task);
-        task.project = project;
-        // Manual "transactions" mongodb sucks. This doesn't really work btw.
-        project = projectRepository.save(project)
-        try {
-            taskRepository.save(task)
-        } catch (Exception e) {
-            project.tasks.remove(task)
-            projectRepository.save(project)
-            throw new DatabaseException("Could not save task.")
-        }
-
-    }
-
 }
