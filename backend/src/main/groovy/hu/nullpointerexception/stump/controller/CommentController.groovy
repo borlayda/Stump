@@ -27,16 +27,16 @@ class CommentController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    def addComment(@RequestBody CommentJSONEntity commentJSONEntity) {
+    def addComment(@RequestBody CommentJSONEntity commentJSONEntity, @AuthenticationPrincipal StumpPrincipal stumpPrincipal) {
         if (commentJSONEntity.commentId == null) {
             commentService.addCommentToTask(
                     commentJSONEntity.createNewEntity(),
-                    commentJSONEntity.authorId,
+                    stumpPrincipal.user.id,
                     commentJSONEntity.taskId)
         } else {
             commentService.addCommentToComment(
                     commentJSONEntity.createNewEntity(),
-                    commentJSONEntity.authorId,
+                    stumpPrincipal.user.id,
                     commentJSONEntity.commentId)
         }
         return GenericResponse.okResponse()
