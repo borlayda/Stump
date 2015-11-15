@@ -24,7 +24,7 @@
                 <th>Status</th>
             </tr>
             <tr ng-repeat="task in selProject.tasks">
-                <td>{{task.title}}</td>
+                <td><a ng-click="getTask(task);">{{task.title}}</td>
                 <td>{{task.description}}</td>
                 <td>{{task.owner.name}}</td>
                 <td>{{task.status}}</td>

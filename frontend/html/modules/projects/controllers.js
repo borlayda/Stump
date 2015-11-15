@@ -4,13 +4,6 @@ angular.module('Project', ['ngCookies'])
 .controller('ProjectController',
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
-        $scope.selProject = $cookies.getObject('selProject');
-
-        // Get specific project
-        $scope.getProject = function (project) {
-            $cookies.put("selProject", JSON.stringify(project));
-            $scope.switchActivePart('projects', 'project');
-        }
 
         // Create user
         $scope.createProject = function(title, description) {

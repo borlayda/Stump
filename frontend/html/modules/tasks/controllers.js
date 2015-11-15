@@ -4,13 +4,6 @@ angular.module('Task', ['ngCookies'])
 .controller('TaskController',
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
-        $scope.selTask = $cookies.getObject('selTask');
-
-        // Get specific task
-        $scope.getTask = function (task) {
-            $cookies.put("selTask", JSON.stringify(task));
-            $scope.switchActivePart('tasks', 'task');
-        }
 
         // Create user
         $scope.createTask = function(title, description, projectId) {

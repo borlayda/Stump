@@ -7,6 +7,9 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.dashboardHTMLActive = 'projects';
         $scope.dashboardPartActive = 'projects';
 
+        $scope.selTask = {};
+        $scope.selProject = {};
+
         $scope.projects = [];
         $http.get('/api/projects').then(function successCallback(response){
             $scope.projects = response.data;
@@ -46,6 +49,18 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.logout = function () {
              console.log("Logging out ...");
              $window.location.assign("/#/login");
+        }
+
+        // Get specific task
+        $scope.getTask = function (task) {
+            $scope.selTask = task;
+            $scope.switchActivePart("tasks", "task");
+        }
+
+        // Get specific task
+        $scope.getProject = function (project) {
+            $scope.selProject = project;
+            $scope.switchActivePart("projects", "project");
         }
 
         // Get all users
