@@ -30,7 +30,7 @@
             <li class="navbar-collapse collapse">
               <a ng-click="switchActivePart('tasks', 'tasks');">Tasks</a>
             </li>
-            <li class="navbar-collapse collapse" ng-if="user.role == 'ADMIN'">
+            <li class="navbar-collapse collapse" ng-if="loginUser.role == 'ADMIN'">
               <a ng-click="switchActivePart('users', 'users');">Users</a>
             </li>
             <li class="navbar-collapse collapse">
@@ -58,7 +58,7 @@
               <a ng-click="switchActivePart('settings', 'settings');">Settings</a>
             </li>
             <li>
-              <a ng-click="switchActivePart('users', 'users');">Users</a>
+              <a ng-click="switchActivePart('users', 'users');" ng-if="loginUser.role == 'ADMIN'">Users</a>
             </li>
           </ul>
         </div>
