@@ -2,15 +2,22 @@ package hu.nullpointerexception.stump.model
 
 import org.springframework.data.mongodb.core.mapping.DBRef
 
+import java.text.SimpleDateFormat
+
 class Comment extends Entity {
 
     String text
-    @DBRef User author
+    String date
+    @DBRef(lazy = true)
+    User author
+    @DBRef(lazy = true)
     List<Comment> comments
+    @DBRef(lazy = true)
+    Task task
 
-    Comment(String text, User author) {
+    Comment(String text) {
         this.text = text
-        this.author = author
+        this.date = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date());
     }
 
 }
