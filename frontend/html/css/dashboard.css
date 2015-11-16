@@ -100,6 +100,11 @@ body {
 .statusBlue {
 }
 
+.description {
+  min-height: 100px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 
 /*
  * Placeholder dashboard ideas

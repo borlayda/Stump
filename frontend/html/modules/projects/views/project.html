@@ -6,7 +6,7 @@
                 <h4 style="padding: 10px;">{{selProject.status}}</h4>
             </div>
         </div>
-        <p>{{selProject.description}}</p>
+        <div class="description">{{selProject.description}}</div>
         <div>
             <button ng-click="changeProjectStatus('OPEN');" class="btn btn-primary">OPEN</button>
             <button ng-click="changeProjectStatus('CLOSED');" class="btn btn-success">CLOSE</button>
