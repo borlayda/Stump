@@ -12,28 +12,8 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.selProject = {};
 
         $scope.projects = [];
-        $http.get('/api/projects').then(function successCallback(response){
-            $scope.projects = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
-
         $scope.tasks = [];
-        $http.get('/api/tasks').then(function successCallback(response){
-            $scope.tasks = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
-
         $scope.users = [];
-        $http.get('/api/users').then(function successCallback(response){
-            $scope.users = response.data;
-        },
-        function errorCallback(response){
-            console.error(response);
-        });
 
         $scope.loginUser = {};
         $http.get('/api/users/me').then(function successCallback(response){
@@ -53,14 +33,32 @@ angular.module('Dashboard', ['ngCookies'])
         }
 
         // Get specific task
-        $scope.getTask = function (task) {
-            $scope.selTask = task;
+        $scope.getTask = function(task){
+            $http.get('/api/tasks/'+task.id).then(function successCallback(response){
+                $scope.selTask = response.data;
+            },
+            function errorCallback(response){
+                console.log("Error on getting task");
+            });
+        }
+
+        $scope.getTaskView = function (task) {
+            $scope.getTask(task);
             $scope.switchActivePart("tasks", "task");
         }
 
-        // Get specific task
-        $scope.getProject = function (project) {
-            $scope.selProject = project;
+        // Get specific project
+        $scope.getProject = function(project){
+            $http.get('/api/projects/'+project.id).then(function successCallback(response){
+                $scope.selProject = response.data;
+            },
+            function errorCallback(response){
+                console.log("Error on getting project");
+            });
+        }
+
+        $scope.getProjectView = function (project) {
+            $scope.getProject(project);
             $scope.switchActivePart("projects", "project");
         }
 
@@ -85,9 +83,9 @@ angular.module('Dashboard', ['ngCookies'])
         }
 
         // Get all tasks
-        $scope.getProjects = function() {
+        $scope.getTasks = function() {
             $http.get('/api/tasks').then(function successCallback(response){
-                $scope.projects = response.data;
+                $scope.tasks = response.data;
             },
             function errorCallback(response){
                 console.error(response);

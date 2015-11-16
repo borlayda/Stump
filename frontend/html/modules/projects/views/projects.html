@@ -9,11 +9,11 @@
                 <th>Status</th>
                 <th>Delete</th>
             </tr>
-            <tr ng-repeat="project in projects">
-                <td><a ng-click="getProject(project);">{{project.title}}</a></td>
+            <tr ng-repeat="project in projects" ng-init="getProjects();">
+                <td><a ng-click="getProjectView(project);">{{project.title}}</a></td>
                 <td>{{project.owner.name}}</td>
                 <td>{{project.description}}</td>
-                <td>{{project.status}}</td>
+                <td ng-class="{'btn-success': project.status == 'CLOSED', 'btn-info': project.status == 'OPEN', 'btn-warning': project.status == 'REOPENED'}">{{project.status}}</td>
                 <td><button class="btn" ng-click="deleteProject(project);" ng-if="project.status == 'CLOSED'">Delete</button></td>
             </tr>
         </table>

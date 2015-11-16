@@ -6,6 +6,13 @@ angular.module('User', ['ngCookies'])
     function ($scope, $rootScope, $location, $http) {
         $scope.selUser = {};
 
+        $http.get('/api/users').then(function successCallback(response){
+            $scope.users = response.data;
+        },
+        function errorCallback(response){
+            console.error(response);
+        });
+
         // Create user
         $scope.addUser = function(name, password, email, role) {
             $http.post('/api/users', {

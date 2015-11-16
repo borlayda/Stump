@@ -4,6 +4,12 @@ angular.module('Task', ['ngCookies'])
 .controller('TaskController',
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
+        $http.get('/api/tasks').then(function successCallback(response){
+            $scope.tasks = response.data;
+        },
+        function errorCallback(response){
+            console.error(response);
+        });
 
         // Create user
         $scope.createTask = function(title, description, projectId) {
@@ -23,14 +29,19 @@ angular.module('Task', ['ngCookies'])
                 $scope.tasks.push({
                     "title": title,
                     "description": description,
-                    "ownerId": $scope.loginUser.id,
-                    "projectId": projectId,
+                    "owner": {"id":$scope.loginUser.id},
+                    "project": {"title":projectId},
                     "status": 'OPEN'
                 });
             },
             function errorCallback(response){
                 console.error(response);
             });
+        }
+
+        // Change Task's status
+        $scope.changeTaskStatus = function(status) {
+            $scope.selTask.status = status;
         }
 
         // Delete user

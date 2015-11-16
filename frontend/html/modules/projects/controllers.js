@@ -4,6 +4,12 @@ angular.module('Project', ['ngCookies'])
 .controller('ProjectController',
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
+        $http.get('/api/projects').then(function successCallback(response){
+            $scope.projects = response.data;
+        },
+        function errorCallback(response){
+            console.error(response);
+        });
 
         // Create user
         $scope.createProject = function(title, description) {
@@ -47,6 +53,11 @@ angular.module('Project', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             });
+        }
+
+        // Change project status
+        $scope.changeProjectStatus = function(status) {
+            $scope.selProject.status = status;
         }
 
         // Modal Windows

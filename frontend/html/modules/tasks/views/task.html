@@ -1,7 +1,17 @@
-<div class="project" ng-controller="TaskController">
-    <div class="projectProperties">
+<div class="task" ng-controller="TaskController">
+    <div class="taskProperties">
         <h1>{{selTask.title}}</h1>
+        <div style="float: right; width: 120px;">
+            <div ng-class="{'btn-success': selTask.status == 'CLOSED', 'btn-info': selTask.status == 'OPEN', 'btn-warning': selTask.status == 'REOPENED'}">
+                <h4 style="padding: 10px;">{{selTask.status}}</h4>
+            </div>
+        </div>
         <p>{{selTask.description}}</p>
+        <div>
+            <button ng-click="changeTaskStatus('OPEN');" class="btn btn-primary">OPEN</button>
+            <button ng-click="changeTaskStatus('CLOSED');" class="btn btn-success">CLOSE</button>
+            <button ng-click="changeTaskStatus('REOPENED');" class="btn btn-warning">REOPEN</button>
+        </div>
         <h2>Users on this task:</h2>
         <table class="table table-striped">
             <tr>
@@ -24,6 +34,15 @@
                 </div>
                 <div class="modal-body">
                     {{comment.text}}
+                </div>
+            </div>
+            <div class="modal-content" ng-repeat="subcomment in comment.comments">
+                <div class="modal-header">
+                    <div style="float: left">{{subcomment.author.name}}:</div>
+                    <div style="float: right">{{subcomment.date}}:</div>
+                </div>
+                <div class="modal-body">
+                    {{subcomment.text}}
                 </div>
             </div>
         </div>
