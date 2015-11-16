@@ -11,7 +11,7 @@ angular.module('Task', ['ngCookies'])
             console.error(response);
         });
 
-        // Create user
+        // Create task
         $scope.createTask = function(title, description, projectId) {
             console.log($scope.loginUser);
             console.log($scope.tasks);
@@ -19,7 +19,6 @@ angular.module('Task', ['ngCookies'])
                 "title": title,
                 "description": description,
                 "ownerId": $scope.loginUser.id,
-                "projectId": projectId,
                 "status": 'OPEN'
             }, {
                 headers: {
@@ -30,13 +29,50 @@ angular.module('Task', ['ngCookies'])
                     "title": title,
                     "description": description,
                     "owner": {"id":$scope.loginUser.id},
-                    "project": {"title":projectId},
                     "status": 'OPEN'
                 });
             },
             function errorCallback(response){
                 console.error(response);
             });
+        }
+
+        // Create comment
+        $scope.addComment = function(taskId, text) {
+            $http.post('/api/comments', {
+                "taskId": taskId,
+                "text": text
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                $scope.selTask.comments.push({
+                    "author": {"name": $scope.loginUser.name},
+                    "timestamp": Date.now(),
+                    "text": text
+                });
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
+        // Convert timestamp to date
+        $scope.convertToDate = function(timestamp) {
+            console.log(timestamp);
+            var date = new Date(timestamp);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+
+            var years = date.getFullYear();
+            var months = date.getMonth();
+            var days = date.getDate();
+
+            // Will display time in 10:30:23 format
+            var formattedTime = years + '.' + months + '.' + days + ' ' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+            return formattedTime;
         }
 
         // Change Task's status

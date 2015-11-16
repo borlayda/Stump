@@ -28,18 +28,18 @@
         <h2>{{selTask.title}}'s comments:</h2>
         <div ng-repeat="comment in selTask.comments">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-info" style="padding: 20px;">
                     <div style="float: left">{{comment.author.name}}:</div>
-                    <div style="float: right">{{comment.date}}:</div>
+                    <div style="float: right">{{convertToDate(comment.timestamp);}}</div>
                 </div>
                 <div class="modal-body">
                     {{comment.text}}
                 </div>
             </div>
             <div class="modal-content" ng-repeat="subcomment in comment.comments">
-                <div class="modal-header">
+                <div class="modal-header bg-info" style="padding: 20px;">
                     <div style="float: left">{{subcomment.author.name}}:</div>
-                    <div style="float: right">{{subcomment.date}}:</div>
+                    <div style="float: right">{{convertToDate(subcomment.timestamp);}}</div>
                 </div>
                 <div class="modal-body">
                     {{subcomment.text}}
@@ -49,7 +49,7 @@
         <div class="modal-content" style="padding: 20px;">
             Name: {{loginUser.name}}<br/>
             Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>
-            <a ng-click="addComment(loginUser.id, task.id, text);">Add comment</a>
+            <a ng-click="addComment(selTask.id, text);">Add comment</a>
         </div>
     </div>
 
