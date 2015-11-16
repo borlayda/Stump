@@ -27,7 +27,7 @@
         </table>
         <h2>{{selTask.title}}'s comments:</h2>
         <div ng-repeat="comment in selTask.comments">
-            <div class="modal-content">
+            <div >
                 <div class="modal-header bg-info" style="padding: 20px;">
                     <div style="float: left">{{comment.author.name}}:</div>
                     <div style="float: right">{{convertToDate(comment.timestamp);}}</div>
@@ -36,7 +36,7 @@
                     {{comment.text}}
                 </div>
             </div>
-            <div class="modal-content" ng-repeat="subcomment in comment.comments">
+            <div ng-repeat="subcomment in comment.comments">
                 <div class="modal-header bg-info" style="padding: 20px;">
                     <div style="float: left">{{subcomment.author.name}}:</div>
                     <div style="float: right">{{convertToDate(subcomment.timestamp);}}</div>
