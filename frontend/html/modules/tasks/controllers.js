@@ -54,6 +54,7 @@ angular.module('Task', ['ngCookies'])
                 });
             },
             function errorCallback(response){
+                alert("Can't add new task!\n"+response.data);
                 console.error(response);
             });
         }

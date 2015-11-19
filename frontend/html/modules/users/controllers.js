@@ -31,8 +31,13 @@ angular.module('User', ['ngCookies'])
                     "email": email,
                     "role": role
                 });
+                $scope.name = "";
+                $scope.password = "";
+                $scope.email = "";
+                $scope.role = "";
             },
             function errorCallback(response){
+                alert("Can't add new user!\n"+response.data);
                 console.error(response);
             });
         }

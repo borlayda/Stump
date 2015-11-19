@@ -31,8 +31,11 @@ angular.module('Project', ['ngCookies'])
                     "ownerId": $scope.loginUser.id,
                     "status": 'OPEN'
                 });
+                $scope.title = "";
+                $scope.description = "";
             },
             function errorCallback(response){
+                alert("Can't add new project!\n"+response.data);
                 console.error(response);
             });
         }
@@ -92,8 +95,11 @@ angular.module('Project', ['ngCookies'])
                     "owner": {"id":$scope.loginUser.id},
                     "status": 'OPEN'
                 });
+                $scope.title = "";
+                $scope.description = "";
             },
             function errorCallback(response){
+                alert("Can't add new task!\n"+response.data);
                 console.error(response);
             });
         }
