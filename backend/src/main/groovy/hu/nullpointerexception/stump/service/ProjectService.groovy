@@ -4,6 +4,7 @@ import hu.nullpointerexception.stump.exception.DatabaseException
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.model.Project
+import hu.nullpointerexception.stump.model.ProjectStatus
 import hu.nullpointerexception.stump.model.Role
 import hu.nullpointerexception.stump.repository.ProjectRepository
 import hu.nullpointerexception.stump.repository.UserRepository
@@ -60,6 +61,16 @@ class ProjectService {
             userRepository.save(user)
             throw new DatabaseException("Could not save project.")
         }
+
+    }
+
+    def changeStatus(String projectId, String status) {
+        def project = projectRepository.findOne(projectId)
+        if (project == null) {
+            throw new EntityNotFoundException("Project not found")
+        }
+        project.status = ProjectStatus.valueOf(status);
+        projectRepository.save(project)
 
     }
 

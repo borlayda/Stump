@@ -3,8 +3,6 @@ package hu.nullpointerexception.stump.model
 import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 
-import java.text.SimpleDateFormat
-
 @Document(collection = "comments")
 class Comment extends Entity {
 

@@ -76,8 +76,20 @@ angular.module('Task', ['ngCookies'])
         }
 
         // Change Task's status
-        $scope.changeTaskStatus = function(status) {
-            $scope.selTask.status = status;
+        $scope.changeProjectStatus = function(status) {
+            $http.post('/api/tasks/change-status', {
+                "taskId": $scope.selTask.id,
+                "status": status
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                $scope.selTask.status = status;
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
         }
 
         // Delete user

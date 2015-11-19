@@ -1,10 +1,8 @@
 package hu.nullpointerexception.stump.service
 
-import hu.nullpointerexception.stump.exception.DatabaseException
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.model.Task
-import hu.nullpointerexception.stump.model.Role
 import hu.nullpointerexception.stump.model.TaskStatus
 import hu.nullpointerexception.stump.repository.ProjectRepository
 import hu.nullpointerexception.stump.repository.TaskRepository
@@ -59,6 +57,16 @@ class TaskService {
         }
         project.tasks.add(task)
         projectRepository.save(project)
+    }
+
+    def changeStatus(String taskId, String status) {
+        def task = taskRepository.findOne(taskId)
+        if (task == null) {
+            throw new EntityNotFoundException("Task not found")
+        }
+        task.status = TaskStatus.valueOf(status);
+        taskRepository.save(task)
+
     }
 
     def getAll() {

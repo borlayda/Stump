@@ -6,6 +6,7 @@ import hu.nullpointerexception.stump.exception.StumpException
 import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.TaskService
+import hu.nullpointerexception.stump.transport.ChangeStatusJSONEntity
 import hu.nullpointerexception.stump.transport.CommentJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
@@ -47,6 +48,12 @@ class TaskController {
         def taskJSONEntity = new TaskJSONEntity(task)
         taskJSONEntity.comments = task.comments.collect {c -> new CommentJSONEntity(c)}
         return taskJSONEntity
+    }
+
+    @RequestMapping(value = "/change-status", method = RequestMethod.POST)
+    GenericResponse changeStatus(@RequestBody ChangeStatusJSONEntity csje) {
+        taskService.changeStatus(csje.taskId, csje.status)
+        return GenericResponse.okResponse()
     }
 
     @ExceptionHandler(StumpException.class)

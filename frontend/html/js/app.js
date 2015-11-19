@@ -4,13 +4,9 @@
 angular.module('Authentication', []);
 angular.module('Dashboard', []);
 
-angular.module('BasicHttpAuthExample', [
+angular.module('DashboardBase', [
     'Authentication',
     'Dashboard',
-    'User',
-    'Settings',
-    'Project',
-    'Task',
     'ngRoute',
     'ngCookies'
 ])

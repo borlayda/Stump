@@ -57,10 +57,51 @@ angular.module('Project', ['ngCookies'])
 
         // Change project status
         $scope.changeProjectStatus = function(status) {
-            $scope.selProject.status = status;
+            $http.post('/api/projects/change-status', {
+                "projectId": $scope.selProject.id,
+                "status": status
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                $scope.selProject.status = status;
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
+        // Create task
+        $scope.createTask = function(title, description, projectId) {
+            console.log($scope.loginUser);
+            console.log($scope.tasks);
+            $http.post('/api/tasks', {
+                "title": title,
+                "description": description,
+                "ownerId": $scope.loginUser.id,
+                "status": 'OPEN'
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                $scope.tasks.push({
+                    "title": title,
+                    "description": description,
+                    "owner": {"id":$scope.loginUser.id},
+                    "status": 'OPEN'
+                });
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
         }
 
         // Modal Windows
+        $scope.addCreateTaskWindow = function (){
+            $('#createTask').modal('show');
+        }
         $scope.addCreateProjectWindow = function (){
             $http.get('/api/projects').then(function successCallback(response){
                 $scope.projects = response.data;

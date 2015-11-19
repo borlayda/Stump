@@ -6,6 +6,7 @@ import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.exception.StumpException
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.UserService
+import hu.nullpointerexception.stump.transport.ChangeRoleJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.UserJSONEntity
 import org.springframework.beans.factory.annotation.Autowired
@@ -64,6 +65,11 @@ class UserController {
         return GenericResponse.okResponse()
     }
 
+    @RequestMapping(value = "/change-role", method = RequestMethod.POST)
+    GenericResponse changeRole(@RequestBody ChangeRoleJSONEntity crr) {
+        userService.changeRole(crr.userId, crr.newRole)
+        return GenericResponse.okResponse()
+    }
 
     @ExceptionHandler(StumpException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

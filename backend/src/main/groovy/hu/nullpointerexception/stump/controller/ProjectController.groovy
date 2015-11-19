@@ -6,6 +6,8 @@ import hu.nullpointerexception.stump.exception.StumpException
 import hu.nullpointerexception.stump.model.Project
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.ProjectService
+import hu.nullpointerexception.stump.transport.ChangeRoleJSONEntity
+import hu.nullpointerexception.stump.transport.ChangeStatusJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.ProjectJSONEntity
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
@@ -57,6 +59,11 @@ class ProjectController {
         return projectJSONEntity
     }
 
+    @RequestMapping(value = "/change-status", method = RequestMethod.POST)
+    GenericResponse changeStatus(@RequestBody ChangeStatusJSONEntity csje) {
+        projectService.changeStatus(csje.projectId, csje.status)
+        return GenericResponse.okResponse()
+    }
 
     @ExceptionHandler(StumpException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
