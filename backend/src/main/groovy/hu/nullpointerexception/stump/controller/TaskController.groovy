@@ -52,7 +52,7 @@ class TaskController {
 
     @RequestMapping(value = "/change-status", method = RequestMethod.POST)
     GenericResponse changeStatus(@RequestBody ChangeStatusJSONEntity csje) {
-        taskService.changeStatus(csje.taskId, csje.status)
+        taskService.changeStatus(csje.id, csje.status)
         return GenericResponse.okResponse()
     }
 

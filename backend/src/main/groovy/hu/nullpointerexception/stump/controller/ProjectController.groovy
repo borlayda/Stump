@@ -61,7 +61,7 @@ class ProjectController {
 
     @RequestMapping(value = "/change-status", method = RequestMethod.POST)
     GenericResponse changeStatus(@RequestBody ChangeStatusJSONEntity csje) {
-        projectService.changeStatus(csje.projectId, csje.status)
+        projectService.changeStatus(csje.id, csje.status)
         return GenericResponse.okResponse()
     }
 

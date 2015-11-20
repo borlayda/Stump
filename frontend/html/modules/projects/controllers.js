@@ -60,8 +60,9 @@ angular.module('Project', ['ngCookies'])
 
         // Change project status
         $scope.changeProjectStatus = function(status) {
+            console.log($scope.selProject.id + " " + status);
             $http.post('/api/projects/change-status', {
-                "projectId": $scope.selProject.id,
+                "id": $scope.selProject.id,
                 "status": status
             }, {
                 headers: {

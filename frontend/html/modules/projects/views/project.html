@@ -9,8 +9,8 @@
         <div class="description">{{selProject.description}}</div>
         <div>
             <button ng-click="changeProjectStatus('OPEN');" class="btn btn-primary">OPEN</button>
+            <button ng-click="changeProjectStatus('IN_PROGRESS');" class="btn btn-info">IN PROGRESS</button>
             <button ng-click="changeProjectStatus('CLOSED');" class="btn btn-success">CLOSE</button>
-            <button ng-click="changeProjectStatus('REOPENED');" class="btn btn-warning">REOPEN</button>
         </div>
         <h2>Users on this project:</h2>
         <table class="table table-striped">

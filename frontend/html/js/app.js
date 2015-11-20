@@ -7,6 +7,10 @@ angular.module('Dashboard', []);
 angular.module('DashboardBase', [
     'Authentication',
     'Dashboard',
+    'User',
+    'Settings',
+    'Project',
+    'Task',
     'ngRoute',
     'ngCookies'
 ])
