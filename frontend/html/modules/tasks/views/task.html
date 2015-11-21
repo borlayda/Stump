@@ -46,10 +46,12 @@
                 </div>
             </div>
         </div>
-        <div class="modal-content" style="padding: 20px;">
+        <a ng-click="showCommentDiv();" ng-if="showAddComment == false">New Comment</a>
+        <div class="modal-content" ng-if="showAddComment == true" style="padding: 20px;">
             Name: {{loginUser.name}}<br/>
             Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>
-            <a ng-click="addComment(selTask.id, text);">Add comment</a>
+            <a ng-click="addComment(selTask.id, text);" style="float:left">Add comment</a>
+            <a ng-click="unshowCommentDiv();" style="float: right">Cancel</a>
         </div>
     </div>
 

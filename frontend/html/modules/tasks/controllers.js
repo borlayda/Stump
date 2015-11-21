@@ -10,6 +10,15 @@ angular.module('Task', ['ngCookies'])
         function errorCallback(response){
             console.error(response);
         });
+        $scope.showAddComment = false;
+
+        $scope.showCommentDiv = function(){
+            $scope.showAddComment = true;
+        }
+
+        $scope.unshowCommentDiv = function(){
+            $scope.showAddComment = false;
+        }
 
         // Create task
         $scope.createTask = function(title, description, projectId) {
