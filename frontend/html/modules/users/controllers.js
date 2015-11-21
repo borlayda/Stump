@@ -65,7 +65,7 @@ angular.module('User', ['ngCookies'])
         // Change password
         $scope.changePassword = function(id, oldPassword, newPassword) {
             $http.post('/api/users/change-password', {
-                'id':id,
+                'userId':id,
                 'oldPassword': oldPassword,
                 'newPassword': newPassword
             },{
@@ -83,7 +83,7 @@ angular.module('User', ['ngCookies'])
         // Change role
         $scope.changeRole = function(id, newRole) {
             $http.post('/api/users/change-role', {
-                'id':id,
+                'userId':id,
                 'role': newRole
             },{
                 headers: {

@@ -8,13 +8,13 @@ import com.fasterxml.jackson.annotation.JsonInclude
 class ChangeRoleJSONEntity {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    String id
+    String userId
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String newRole
 
-    ChangeRoleJSONEntity(String id, String newRole) {
+    ChangeRoleJSONEntity(String userId, String newRole) {
 
-        id = id
+        userId = userId
         newRole = newRole
 
     }
