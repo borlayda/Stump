@@ -9,7 +9,7 @@
     </div>
 
     <button class="btn btn-lg" ng-click="addChangePasswordWindow();">Change Password</button>
-    <button class="btn btn-lg" ng-click="addChangeRoleWindow();">Change Role</button>
+    <button class="btn btn-lg" ng-click="addChangeRoleWindow();" ng-if="loginUser.role == 'ADMIN'">Change Role</button>
 
     <!-- Change Password Modal Window -->
     <div id="changePassword" class="modal fade" data-toogle="modal" role="dialog">
