@@ -5,6 +5,10 @@
             <div ng-class="{'btn-success': selTask.status == 'CLOSED', 'btn-info': selTask.status == 'OPEN', 'btn-warning': selTask.status == 'REOPENED'}">
                 <h4 style="padding: 10px;">{{selTask.status}}</h4>
             </div>
+            <p>Users on this project:</p>
+            <p ng-repeat="user in selTask.users">
+                <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
+            </p>
         </div>
         <div class="description">{{selTask.description}}</div>
         <div>
@@ -12,19 +16,6 @@
             <button ng-click="changeTaskStatus('CLOSED');" class="btn btn-success">CLOSE</button>
             <button ng-click="changeTaskStatus('REOPENED');" class="btn btn-warning">REOPEN</button>
         </div>
-        <h2>Users on this task:</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>E-mail</th>
-                <th>Role</th>
-            </tr>
-            <tr ng-repeat="user in selTask.users">
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.role}}</td>
-            </tr>
-        </table>
         <h2>{{selTask.title}}'s comments:</h2>
         <div ng-repeat="comment in selTask.comments">
             <div >

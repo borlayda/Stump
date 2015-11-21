@@ -5,6 +5,10 @@
             <div ng-class="{'btn-success': selProject.status == 'CLOSED', 'btn-primary': selProject.status == 'OPEN', 'btn-info': selProject.status == 'IN_PROGRESS'}">
                 <h4 style="padding: 10px;">{{selProject.status}}</h4>
             </div>
+            <p>Users on this project:</p>
+            <p ng-repeat="user in selTask.users">
+                <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
+            </p>
         </div>
         <div class="description">{{selProject.description}}</div>
         <div>
@@ -12,19 +16,6 @@
             <button ng-click="changeProjectStatus('IN_PROGRESS');" class="btn btn-info">IN PROGRESS</button>
             <button ng-click="changeProjectStatus('CLOSED');" class="btn btn-success">CLOSE</button>
         </div>
-        <h2>Users on this project:</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>E-mail</th>
-                <th>Role</th>
-            </tr>
-            <tr ng-repeat="user in selProject.users">
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.role}}</td>
-            </tr>
-        </table>
         <h2>Project's tasks:</h2>
         <table class="table table-striped">
             <tr>
