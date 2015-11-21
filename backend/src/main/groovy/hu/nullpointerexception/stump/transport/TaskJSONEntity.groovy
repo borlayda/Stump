@@ -25,6 +25,8 @@ class TaskJSONEntity extends JSONEntity<Task> {
     String projectId
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<CommentJSONEntity> comments
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<UserJSONEntity> users
 
     TaskJSONEntity(Task source) {
         super(source)

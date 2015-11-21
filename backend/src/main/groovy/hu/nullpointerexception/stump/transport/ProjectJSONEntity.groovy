@@ -21,6 +21,8 @@ class ProjectJSONEntity extends JSONEntity<Project> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<TaskJSONEntity> tasks
     ProjectStatus status
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<UserJSONEntity> users
 
     ProjectJSONEntity(Project source) {
         super(source)

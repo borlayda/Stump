@@ -46,6 +46,8 @@ class TaskService {
             throw new EntityNotFoundException("User with id '" + userId + "' not found.")
         }
         task.owner = user
+        task.users = new ArrayList<>()
+        task.users.add(user)
         def project = projectRepository.findOne(projectId)
         if (project == null) {
             throw new EntityNotFoundException("Project with id '" + projectId + "' not found.")

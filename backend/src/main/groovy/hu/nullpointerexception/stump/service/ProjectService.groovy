@@ -33,6 +33,8 @@ class ProjectService {
             throw new EntityNotFoundException("User with id '" + userId + "' not found.")
         }
         project.owner = user
+        project.users = new ArrayList<>()
+        project.users.add(user)
         try {
             return projectRepository.save(project)
         } catch (DuplicateKeyException e) {
