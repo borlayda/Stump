@@ -19,6 +19,7 @@ angular.module('Task', ['ngCookies'])
                 "title": title,
                 "description": description,
                 "ownerId": $scope.loginUser.id,
+                "projectId": projectId,
                 "status": 'OPEN'
             }, {
                 headers: {
@@ -77,9 +78,9 @@ angular.module('Task', ['ngCookies'])
         }
 
         // Change Task's status
-        $scope.changeProjectStatus = function(status) {
+        $scope.changeTaskStatus = function(status) {
             $http.post('/api/tasks/change-status', {
-                "taskId": $scope.selTask.id,
+                "id": $scope.selTask.id,
                 "status": status
             }, {
                 headers: {

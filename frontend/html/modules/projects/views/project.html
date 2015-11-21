@@ -1,8 +1,8 @@
 <div class="project" ng-controller="ProjectController">
     <div class="projectProperties">
         <h1>{{selProject.title}}</h1>
-        <div style="float: right; width: 120px;">
-            <div ng-class="{'btn-success': selProject.status == 'CLOSED', 'btn-info': selProject.status == 'OPEN', 'btn-warning': selProject.status == 'REOPENED'}">
+        <div style="float: right; width: 150px;">
+            <div ng-class="{'btn-success': selProject.status == 'CLOSED', 'btn-primary': selProject.status == 'OPEN', 'btn-info': selProject.status == 'IN_PROGRESS'}">
                 <h4 style="padding: 10px;">{{selProject.status}}</h4>
             </div>
         </div>

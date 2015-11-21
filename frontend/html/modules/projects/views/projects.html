@@ -13,7 +13,7 @@
                 <td><a ng-click="getProjectView(project);">{{project.title}}</a></td>
                 <td>{{project.owner.name}}</td>
                 <td>{{project.description}}</td>
-                <td ng-class="{'btn-success': project.status == 'CLOSED', 'btn-info': project.status == 'OPEN', 'btn-warning': project.status == 'REOPENED'}">{{project.status}}</td>
+                <td ng-class="{'btn-success': project.status == 'CLOSED', 'btn-primary': project.status == 'OPEN', 'btn-info': project.status == 'IN_PROGRESS'}">{{project.status}}</td>
                 <td><button class="btn" ng-click="deleteProject(project);" ng-if="project.status == 'CLOSED'">Delete</button></td>
             </tr>
         </table>

@@ -84,6 +84,7 @@ angular.module('Project', ['ngCookies'])
                 "title": title,
                 "description": description,
                 "ownerId": $scope.loginUser.id,
+                "projectId": projectId,
                 "status": 'OPEN'
             }, {
                 headers: {
