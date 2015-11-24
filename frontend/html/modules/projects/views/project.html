@@ -78,13 +78,18 @@
                     <form>
                         Title: <input type="text" ng-model="title" value="{{selProject.title}}"/><br/>
                         Description: <textarea ng-model="description">{{selProject.description}}</textarea><br/>
-
+                        Status: <select ng-model="status" ng-init="status = {{selProject.status}}">
+                            <option ng-repeat="pStatus in PROJECT_STATUS" value="{{pStatus}}">{{pStatus}}</option>
+                        </select><br/>
+                        Owner: <select ng-model="owner" ng-init="users = getUsers(); owner = selProject.owner.id">
+                            <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
+                        </select><br/>
                     </select><br/>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="changeProject(title, description, selProject.id, status, users);" data-dismiss="modal">Create Task</button><br/>
+                        <button class="btn pull-left" ng-click="changeProject(title, description, selProject.id, status, owner);" data-dismiss="modal">Create Task</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>

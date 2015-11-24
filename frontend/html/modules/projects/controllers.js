@@ -4,7 +4,8 @@ angular.module('Project', ['ngCookies'])
 .controller('ProjectController',
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
-        $scope.TASK_TYPES = ["ISSUE", "TASK"]
+        $scope.TASK_TYPES = ["ISSUE", "TASK"];
+        $scope.PROJECT_STATUS = ["OPEN", "IN_PROGRESS", "RESOLVED", "REOPENED", "CLOSED"]
 
         $http.get('/api/projects').then(function successCallback(response){
             $scope.projects = response.data;
@@ -122,6 +123,9 @@ angular.module('Project', ['ngCookies'])
                 console.error(response);
             });
             $('#createProject').modal('show');
+        }
+        $scope.addChangeProjectWindow = function (){
+            $('#changeProject').modal('show');
         }
     }
 ]);
