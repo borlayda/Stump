@@ -98,6 +98,26 @@ angular.module('Task', ['ngCookies'])
             return formattedTime;
         }
 
+        // Change Task's data
+        $scope.changeTask = function(taskId, title, description, ownerId, status) {
+            $http.post('/api/tasks/change', {
+                "taskId": taskId,
+                "title": title,
+                "description": description,
+                "ownerId": ownerId,
+                "status": status
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                console.log("Done!" + response.data);
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
         // Change Task's status
         $scope.changeTaskStatus = function(status) {
             $http.post('/api/tasks/change-status', {

@@ -86,6 +86,26 @@ angular.module('Project', ['ngCookies'])
             });
         }
 
+        // Change Project's data
+        $scope.changeProject = function(projectId, title, description, ownerId, status) {
+            $http.post('/api/projects/change', {
+                "projectId": projectId,
+                "title": title,
+                "description": description,
+                "ownerId": ownerId,
+                "status": status
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                console.log("Done!" + response.data);
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
         // Create task
         $scope.createTask = function(title, description, projectId, type) {
             console.log($scope.loginUser);

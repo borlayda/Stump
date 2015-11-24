@@ -52,6 +52,23 @@ class TaskService {
         projectRepository.save(project)
     }
 
+    def changeTask(String taskId, String title, String descrition, String ownerId, String status) {
+        def task = taskRepository.findOne(taskId)
+        if (task == null) {
+            throw new EntityNotFoundException("Task not found")
+        }
+        def owner = userRepository.findOne(ownerId)
+        if (owner == null) {
+            throw new EntityNotFoundException("User with id '" + ownerId + "' not found.")
+        }
+        task.status = TaskStatus.valueOf(status)
+        task.title = title
+        task.description = descrition
+        task.owner = owner
+        taskRepository.save(task)
+
+    }
+
     def changeStatus(String taskId, String status) {
         def task = taskRepository.findOne(taskId)
         if (task == null) {

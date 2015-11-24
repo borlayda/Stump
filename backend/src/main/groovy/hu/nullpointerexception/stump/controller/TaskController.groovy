@@ -7,6 +7,7 @@ import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.TaskService
 import hu.nullpointerexception.stump.transport.ChangeStatusJSONEntity
+import hu.nullpointerexception.stump.transport.ChangeTaskJSONEntity
 import hu.nullpointerexception.stump.transport.ChangeWorkTimeJSONEntity
 import hu.nullpointerexception.stump.transport.CommentJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
@@ -49,6 +50,12 @@ class TaskController {
         def taskJSONEntity = new TaskJSONEntity(task)
         taskJSONEntity.comments = task.comments.collect {c -> new CommentJSONEntity(c)}
         return taskJSONEntity
+    }
+
+    @RequestMapping(value = "/change", method = RequestMethod.POST)
+    GenericResponse changeTask(@RequestBody ChangeTaskJSONEntity ct) {
+        taskService.changeTask(ct.taskId, ct.title, ct.description, ct.ownerId, ct.status)
+        return GenericResponse.okResponse()
     }
 
     @RequestMapping(value = "/change-status", method = RequestMethod.POST)

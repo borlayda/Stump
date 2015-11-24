@@ -6,8 +6,10 @@ import hu.nullpointerexception.stump.exception.StumpException
 import hu.nullpointerexception.stump.model.Project
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.ProjectService
+import hu.nullpointerexception.stump.transport.ChangeProjectJSONEntity
 import hu.nullpointerexception.stump.transport.ChangeRoleJSONEntity
 import hu.nullpointerexception.stump.transport.ChangeStatusJSONEntity
+import hu.nullpointerexception.stump.transport.ChangeTaskJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.ProjectJSONEntity
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
@@ -57,6 +59,12 @@ class ProjectController {
         def projectJSONEntity = new ProjectJSONEntity(project)
         projectJSONEntity.tasks = project.getTasks().collect {t -> new TaskJSONEntity(t)}
         return projectJSONEntity
+    }
+
+    @RequestMapping(value = "/change", method = RequestMethod.POST)
+    GenericResponse changeProject(@RequestBody ChangeProjectJSONEntity cp) {
+        projectService.changeProject(cp.projectId, cp.title, cp.description, cp.ownerId, cp.status)
+        return GenericResponse.okResponse()
     }
 
     @RequestMapping(value = "/change-status", method = RequestMethod.POST)

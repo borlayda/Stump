@@ -6,6 +6,7 @@ import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.model.Project
 import hu.nullpointerexception.stump.model.ProjectStatus
 import hu.nullpointerexception.stump.model.Role
+import hu.nullpointerexception.stump.model.TaskStatus
 import hu.nullpointerexception.stump.repository.ProjectRepository
 import hu.nullpointerexception.stump.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -40,6 +41,23 @@ class ProjectService {
         } catch (DuplicateKeyException e) {
             throw new EntityAlreadyExistsException(e)
         }
+
+    }
+
+    def changeProject(String projectId, String title, String descrition, String ownerId, String status) {
+        def project = projectRepository.findOne(projectId)
+        if (project == null) {
+            throw new EntityNotFoundException("Task not found")
+        }
+        def owner = userRepository.findOne(ownerId)
+        if (owner == null) {
+            throw new EntityNotFoundException("User with id '" + ownerId + "' not found.")
+        }
+        project.status = ProjectStatus.valueOf(status)
+        project.title = title
+        project.description = descrition
+        project.owner = owner
+        projectRepository.save(project)
 
     }
 
