@@ -57,7 +57,17 @@ class TaskService {
         if (task == null) {
             throw new EntityNotFoundException("Task not found")
         }
-        task.status = TaskStatus.valueOf(status);
+        task.status = TaskStatus.valueOf(status)
+        taskRepository.save(task)
+
+    }
+
+    def addWorkTime(String taskId, Long workTimeAddition) {
+        def task = taskRepository.findOne(taskId)
+        if (task == null) {
+            throw new EntityNotFoundException("Task not found")
+        }
+        task.workTime = task.workTime + workTimeAddition
         taskRepository.save(task)
 
     }

@@ -107,6 +107,23 @@ angular.module('Task', ['ngCookies'])
             });
         }
 
+        // Add task worktime
+        $scope.addWorkTime = function(workTime) {
+            $http.post('/api/tasks/change-worktime', {
+                "id": $scope.selTask.id,
+                "workTime": workTime
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                $scope.selTask.workTime = $scope.selTask.workTime + workTime;
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
         // Delete user
         $scope.deleteTask = function(task) {
             $http.delete('/api/tasks/'+task.id, {

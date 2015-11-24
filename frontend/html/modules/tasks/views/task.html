@@ -9,6 +9,8 @@
             <p ng-repeat="user in selTask.users">
                 <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
             </p>
+            <p>Working Time: <input type="text"  ng-model="minute" value="{{selTask.workTime/60}}"/>:<input type="text"  ng-model="second" value="{{selTask.workTime/60}}"/></p>
+            <button ng-click="addWorkTime(minute*60+second);" class="btn btn-primary">Add workTime</button>
         </div>
         <div class="description">{{selTask.description}}</div>
         <div>

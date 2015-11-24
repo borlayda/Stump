@@ -7,6 +7,7 @@
                 <th>Owner</th>
                 <th>Description</th>
                 <th>Status</th>
+                <th>WorkTime</th>
                 <th ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'">Delete</th>
             </tr>
             <tr ng-repeat="task in tasks" ng-init="getTasks();">
@@ -14,6 +15,7 @@
                 <td>{{task.owner.name}}</td>
                 <td>{{task.description}}</td>
                 <td ng-class="{'btn-success': task.status == 'CLOSED', 'btn-info': task.status == 'OPEN', 'btn-warning': task.status == 'REOPENED'}">{{task.status}}</td>
+                <td>{{task.workTime}}</td>
                 <td ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'"><button class="btn" ng-click="deleteTask(project);">Delete</button></td>
             </tr>
         </table>

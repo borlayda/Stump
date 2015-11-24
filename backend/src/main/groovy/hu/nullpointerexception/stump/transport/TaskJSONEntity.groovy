@@ -29,6 +29,7 @@ class TaskJSONEntity extends JSONEntity<Task> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<UserJSONEntity> users
     TaskType type
+    Long workTime
 
     TaskJSONEntity(Task source) {
         super(source)
@@ -38,6 +39,7 @@ class TaskJSONEntity extends JSONEntity<Task> {
         owner = new UserJSONEntity(source.owner)
         status = source.status
         type = source.type
+        workTime = source.workTime
     }
 
     TaskJSONEntity() {
