@@ -18,7 +18,7 @@
             </tr>
         </table>
     </div>
-    <button class="btn btn-info btn-lg" ng-click="addCreateTaskWindow();">Create Task</button><br/>
+    <button class="btn btn-info btn-lg" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Create Task</button><br/>
     <div id="createTask" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
