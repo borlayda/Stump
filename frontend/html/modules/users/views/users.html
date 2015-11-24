@@ -14,13 +14,13 @@
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.role}}</td>
-                <td><button class="btn" ng-click="deleteUser(user);">Delete</button></td>
-                <td><button class="btn" ng-click="addChangePasswordWindow(user);">Change</button></td>
-                <td><button class="btn" ng-click="addChangeRoleWindow(user);">Change</button></td>
+                <td ng-if="loginUser.role == 'ADMIN'"><button class="btn" ng-click="deleteUser(user);">Delete</button></td>
+                <td ng-if="loginUser.role == 'ADMIN'"><button class="btn" ng-click="addChangePasswordWindow(user);">Change</button></td>
+                <td ng-if="loginUser.role == 'ADMIN'"><button class="btn" ng-click="addChangeRoleWindow(user);">Change</button></td>
             </tr>
         </table>
     </div>
-    <button class="btn btn-info btn-lg" ng-click="addUserWindow();">Register</button><br/>
+    <button class="btn btn-info btn-lg" ng-click="addUserWindow();" ng-if="loginUser.role == 'ADMIN'">Register</button><br/>
 
     <!-- Create User Modal Window -->
     <div id="registerUser" class="modal fade" role="dialog">
