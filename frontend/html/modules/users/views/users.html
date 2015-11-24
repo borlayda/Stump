@@ -6,9 +6,9 @@
                 <th>Name</th>
                 <th>E-mail</th>
                 <th>Role</th>
-                <th>Delete</th>
-                <th>Change Password</th>
-                <th>Change Role</th>
+                <th ng-if="loginUser.role == 'ADMIN'">Delete</th>
+                <th ng-if="loginUser.role == 'ADMIN'">Change Password</th>
+                <th ng-if="loginUser.role == 'ADMIN'">Change Role</th>
             </tr>
             <tr ng-repeat="user in users | orderBy:'+name'">
                 <td>{{user.name}}</td>
