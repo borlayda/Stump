@@ -4,6 +4,8 @@ angular.module('Project', ['ngCookies'])
 .controller('ProjectController',
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
+        $scope.TASK_TYPES = ["ISSUE", "TASK"]
+
         $http.get('/api/projects').then(function successCallback(response){
             $scope.projects = response.data;
         },
@@ -77,7 +79,7 @@ angular.module('Project', ['ngCookies'])
         }
 
         // Create task
-        $scope.createTask = function(title, description, projectId) {
+        $scope.createTask = function(title, description, projectId, type) {
             console.log($scope.loginUser);
             console.log($scope.tasks);
             $http.post('/api/tasks', {
@@ -85,7 +87,8 @@ angular.module('Project', ['ngCookies'])
                 "description": description,
                 "ownerId": $scope.loginUser.id,
                 "projectId": projectId,
-                "status": 'OPEN'
+                "status": 'OPEN',
+                "type": type
             }, {
                 headers: {
                     "Content-Type": "application/json"
@@ -95,7 +98,8 @@ angular.module('Project', ['ngCookies'])
                     "title": title,
                     "description": description,
                     "owner": {"id":$scope.loginUser.id},
-                    "status": 'OPEN'
+                    "status": 'OPEN',
+                    "type": type
                 });
                 $scope.title = "";
                 $scope.description = "";

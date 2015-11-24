@@ -34,11 +34,14 @@
                         </select><br/>
                         Title: <input type="text" ng-model="title"/><br/>
                         Description: <textarea ng-model="description"></textarea><br/>
+                        Type: <select ng-model="type">
+                        <option ng-repeat="type in TASK_TYPES" value="{{type}}">{{type}}</option>
+                    </select><br/>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="createTask(title, description, projectId); getTasks();" data-dismiss="modal">Create Task</button><br/>
+                        <button class="btn pull-left" ng-click="createTask(title, description, projectId, type); getTasks();" data-dismiss="modal">Create Task</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>

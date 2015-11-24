@@ -7,6 +7,7 @@ import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.TaskStatus
 import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.TaskStatus
+import hu.nullpointerexception.stump.model.TaskType
 
 /**
  * Created by Márton Tóth
@@ -27,6 +28,7 @@ class TaskJSONEntity extends JSONEntity<Task> {
     List<CommentJSONEntity> comments
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<UserJSONEntity> users
+    TaskType type
 
     TaskJSONEntity(Task source) {
         super(source)
@@ -35,6 +37,7 @@ class TaskJSONEntity extends JSONEntity<Task> {
         description = source.description
         owner = new UserJSONEntity(source.owner)
         status = source.status
+        type = source.type
     }
 
     TaskJSONEntity() {
@@ -42,7 +45,7 @@ class TaskJSONEntity extends JSONEntity<Task> {
 
     @Override
     Task createNewEntity() {
-        def task = new Task(title, description)
+        def task = new Task(title, description, type)
         if (status != null) {
             task.status = status
         }

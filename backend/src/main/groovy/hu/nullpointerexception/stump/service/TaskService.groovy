@@ -31,15 +31,6 @@ class TaskService {
         this.projectRepository = projectRepository
     }
 
-//    @PostConstruct
-//    def postConstruct() {
-//        def task = new Task()
-//        task.title = "Krumplipucolas"
-//        task.description = "Meg kell pucolni a taskokat"
-//        task.status = TaskStatus.OPEN;
-//        addTask(task, "5647435aabce860542707d73", "56478674abce5d43d49e0014")
-//    }
-
     def addTask(Task task, String userId, String projectId) {
         def user = userRepository.findOne(userId)
         if (user == null) {

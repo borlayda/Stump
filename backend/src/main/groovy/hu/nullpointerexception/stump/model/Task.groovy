@@ -15,11 +15,13 @@ class Task extends Entity {
     TaskStatus status
     @DBRef(lazy = true)
     List<Comment> comments
+    TaskType type;
 
-    Task(String title, String description) {
+    Task(String title, String description, TaskType type) {
         this.title = title
         this.description = description
         this.status = TaskStatus.OPEN
+        this.type = type
     }
 
     Task() {
