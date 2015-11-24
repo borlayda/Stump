@@ -13,7 +13,7 @@
                 <td><a ng-click="getProjectView(project);">{{project.title}}</a></td>
                 <td>{{project.owner.name}}</td>
                 <td>{{project.description}}</td>
-                <td ng-class="{'btn-success': project.status == 'CLOSED', 'btn-primary': project.status == 'OPEN', 'btn-info': project.status == 'IN_PROGRESS'}">{{project.status}}</td>
+                <td ng-class="projectStatusLayout">{{project.status}}</td>
                 <td ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'"><button class="btn" ng-click="deleteProject(project);" ng-if="project.status == 'CLOSED'">Delete</button></td>
             </tr>
         </table>

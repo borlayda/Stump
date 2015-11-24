@@ -5,6 +5,14 @@ angular.module('Task', ['ngCookies'])
     ['$scope', '$rootScope', '$location', '$http', '$cookies',
     function ($scope, $rootScope, $location, $http, $cookies) {
         $scope.TASK_TYPES = ["ISSUE", "TASK"];
+        $scope.TASK_STATUSES = ["OPEN", "IN_PROGRESS", "REVIEW", "TESTING", "VERIFYING", "CLOSED"]
+        $scope.taskStatusLayout = {
+             'btn-success': $scope.selTask.status == 'CLOSED',
+             'btn-info': $scope.selTask.status == 'IN_PROGRESS',
+             'btn-warning': $scope.selTask.status == 'REVIEW',
+             'btn-info': $scope.selTask.status == 'OPEN',
+             'btn-warning': $scope.selTask.status == 'TESTING'
+        };
 
         $http.get('/api/tasks').then(function successCallback(response){
             $scope.tasks = response.data;
@@ -109,6 +117,8 @@ angular.module('Task', ['ngCookies'])
 
         // Add task worktime
         $scope.addWorkTime = function(workTime) {
+            console.log(workTime);
+            console.log($scope.selTask.workTime);
             $http.post('/api/tasks/change-worktime', {
                 "id": $scope.selTask.id,
                 "workTime": workTime
@@ -145,6 +155,9 @@ angular.module('Task', ['ngCookies'])
         // Modal Windows
         $scope.addCreateTaskWindow = function (){
             $('#createTask').modal('show');
+        }
+        $scope.addChangeTaskWindow = function (){
+            $('#changeTask').modal('show');
         }
     }
 ]);

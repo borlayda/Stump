@@ -1,20 +1,18 @@
-< class="project" ng-controller="ProjectController">
+<div class="project" ng-controller="ProjectController">
     <div class="projectProperties">
         <h1>{{selProject.title}}</h1>
         <div style="float: right; width: 150px;">
-            <div ng-class="{'btn-success': selProject.status == 'CLOSED', 'btn-primary': selProject.status == 'OPEN', 'btn-info': selProject.status == 'IN_PROGRESS'}">
+            <div ng-class="projectStatusLayout">
                 <h4 style="padding: 10px;">{{selProject.status}}</h4>
             </div>
             <p>Users on this project:</p>
-            <p ng-repeat="user in selTask.users">
+            <p ng-repeat="user in selProject.users">
                 <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
             </p>
         </div>
         <div class="description">{{selProject.description}}</div>
         <div>
-            <button ng-click="changeProjectStatus('OPEN');" class="btn btn-primary">OPEN</button>
-            <button ng-click="changeProjectStatus('IN_PROGRESS');" class="btn btn-info">IN PROGRESS</button>
-            <button ng-click="changeProjectStatus('CLOSED');" class="btn btn-success">CLOSE</button>
+            <button ng-repeat="status in PROJECT_STATUSES" ng-click="changeTaskStatus(status);" class="btn btn-primary">{{status}}</button>
         </div>
         <h2>Project's tasks:</h2>
         <table class="table table-striped">
@@ -76,12 +74,12 @@
 
                 <div class="modal-body">
                     <form>
-                        Title: <input type="text" ng-model="title" value="{{selProject.title}}"/><br/>
-                        Description: <textarea ng-model="description">{{selProject.description}}</textarea><br/>
-                        Status: <select ng-model="status" ng-init="status = {{selProject.status}}">
-                            <option ng-repeat="pStatus in PROJECT_STATUS" value="{{pStatus}}">{{pStatus}}</option>
+                        Title: <input type="text" ng-model="selProject.title"/><br/>
+                        Description: <textarea ng-model="selProject.description"></textarea><br/>
+                        Status: <select ng-model="selProject.status">
+                            <option ng-repeat="pStatus in PROJECT_STATUSES" value="{{pStatus}}">{{pStatus}}</option>
                         </select><br/>
-                        Owner: <select ng-model="owner" ng-init="users = getUsers(); owner = selProject.owner.id">
+                        Owner: <select ng-model="selProject.owner.id" ng-init="getUsers()">
                             <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
                         </select><br/>
                     </select><br/>
@@ -89,7 +87,7 @@
                 </div>
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="changeProject(title, description, selProject.id, status, owner);" data-dismiss="modal">Create Task</button><br/>
+                        <button class="btn pull-left" ng-click="changeProject(selProject.title, selProject.description, selProject.id, selProject.status, selProject.owner.id);" data-dismiss="modal">Change Project</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>

@@ -2,21 +2,19 @@
     <div class="taskProperties">
         <h1>{{selTask.title}}</h1>
         <div style="float: right; width: 120px;">
-            <div ng-class="{'btn-success': selTask.status == 'CLOSED', 'btn-info': selTask.status == 'OPEN', 'btn-warning': selTask.status == 'REOPENED'}">
+            <div ng-class="">
                 <h4 style="padding: 10px;">{{selTask.status}}</h4>
             </div>
             <p>Users on this project:</p>
             <p ng-repeat="user in selTask.users">
                 <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
             </p>
-            <p>Working Time: <input type="text"  ng-model="minute" value="{{selTask.workTime/60}}" size="3"/>:<input type="text"  ng-model="second" value="{{selTask.workTime/60}}" size="2"/></p>
-            <button ng-click="addWorkTime(minute*60+second);" class="btn btn-primary">Add workTime</button>
+            <p>Working Time: <input type="text"  ng-model="minute" value="0+parseInt({{selTask.workTime/60}})" size="3"/>:<input type="text"  ng-model="second" value="0+{{selTask.workTime%60}}" size="2"/></p>
+            <button ng-click="addWorkTime(pasreInt(minute)*60+parseInt(second));" class="btn btn-primary">Add workTime</button>
         </div>
         <div class="description">{{selTask.description}}</div>
         <div>
-            <button ng-click="changeTaskStatus('OPEN');" class="btn btn-primary">OPEN</button>
-            <button ng-click="changeTaskStatus('CLOSED');" class="btn btn-success">CLOSE</button>
-            <button ng-click="changeTaskStatus('REOPENED');" class="btn btn-warning">REOPEN</button>
+            <button ng-repeat="status in TASK_STATUSES" ng-click="changeTaskStatus(status);" class="btn btn-primary">{{status}}</button>
         </div>
         <h2>{{selTask.title}}'s comments:</h2>
         <div ng-repeat="comment in selTask.comments">
@@ -45,6 +43,41 @@
             Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>
             <a ng-click="addComment(selTask.id, text);" style="float:left">Add comment</a>
             <a ng-click="unshowCommentDiv();" style="float: right">Cancel</a>
+        </div>
+    </div>
+
+    <button class="btn btn-info btn-lg" ng-click="addChangeTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Change Task</button><br/>
+    <div id="changeTask" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change project</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        Title: <input type="text" ng-model="selTask.title"/><br/>
+                        Description: <textarea ng-model="selTask.description"></textarea><br/>
+                        Status: <select ng-model="selTask.status">
+                        <option ng-repeat="tStatus in TASK_STATUSES" value="{{tStatus}}">{{tStatus}}</option>
+                    </select><br/>
+                        Owner: <select ng-model="selTask.owner.id" ng-init="getUsers()">
+                        <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
+                    </select><br/>
+                        </select><br/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div style="float: left">
+                        <button class="btn pull-left" ng-click="changeTask(selTask.title, selTask.description, selTask.id, selTask.status, selTask.owner.id);" data-dismiss="modal">Change Task</button><br/>
+                    </div>
+                    <div style="float: right">
+                        <button class="btn pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 

@@ -15,6 +15,8 @@ class Task extends Entity {
     TaskStatus status
     @DBRef(lazy = true)
     List<Comment> comments
+    @DBRef(lazy = true)
+    List<User> users
     TaskType type
     Long workTime
 
@@ -28,6 +30,7 @@ class Task extends Entity {
 
     Task() {
         this.comments = new ArrayList<>()
+        this.users = new ArrayList<>()
     }
 
 
