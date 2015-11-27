@@ -26,18 +26,26 @@
                 <div class="modal-body">
                     {{comment.text}}
                 </div>
-            </div>
-            <div ng-repeat="subcomment in comment.comments">
-                <div class="modal-header bg-info" style="padding: 20px;">
-                    <div style="float: left">{{subcomment.author.name}}:</div>
-                    <div style="float: right">{{convertToDate(subcomment.timestamp);}}</div>
+                <div ng-repeat="subcomment in comment.comments" style="margin-left: 5px">
+                    <div class="modal-header bg-info" style="padding: 20px;">
+                        <div style="float: left">{{subcomment.author.name}}:</div>
+                        <div style="float: right">{{convertToDate(subcomment.timestamp);}}</div>
+                    </div>
+                    <div class="modal-body">
+                        {{subcomment.text}}
+                    </div>
                 </div>
-                <div class="modal-body">
-                    {{subcomment.text}}
+                <button class="btn btn-info btn-lg" ng-click="showCommentDiv();" ng-if="showAddSubComment == false">New Sub Comment</button>
+                <div class="modal-content" ng-if="showAddSubComment == true" style="padding: 20px;">
+                    Name: {{loginUser.name}}<br/>
+                    Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>
+                    <a ng-click="addSubComment(comment.id, text);" style="float:left">Add Sub Comment</a>
+                    <a ng-click="unshowSubCommentDiv();" style="float: right">Cancel</a>
                 </div>
             </div>
+            <button class="btn btn-info btn-lg" ng-click="deleteComment(comment)">Delete Comment</button>
         </div>
-        <a ng-click="showCommentDiv();" ng-if="showAddComment == false">New Comment</a>
+        <button class="btn btn-info btn-lg" ng-click="showCommentDiv();" ng-if="showAddComment == false">New Comment</button>
         <div class="modal-content" ng-if="showAddComment == true" style="padding: 20px;">
             Name: {{loginUser.name}}<br/>
             Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>

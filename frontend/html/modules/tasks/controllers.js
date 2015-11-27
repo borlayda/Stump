@@ -30,6 +30,16 @@ angular.module('Task', ['ngCookies'])
             $scope.showAddComment = false;
         }
 
+        $scope.showAddSubComment = false;
+
+        $scope.showSubCommentDiv = function(){
+            $scope.showAddSubComment = true;
+        }
+
+        $scope.unshowSubCommentDiv = function(){
+            $scope.showAddSubComment = false;
+        }
+
         // Create task
         $scope.createTask = function(title, description, projectId, type) {
             console.log($scope.loginUser);
@@ -154,7 +164,7 @@ angular.module('Task', ['ngCookies'])
             });
         }
 
-        // Delete user
+        // Delete task
         $scope.deleteTask = function(task) {
             $http.delete('/api/tasks/'+task.id, {
                 headers: {
@@ -162,8 +172,26 @@ angular.module('Task', ['ngCookies'])
                 }
             }).then(function successCallback(response){
                 for (var i=0; i < $scope.tasks.length; i++){
-                    if ($scope.tasks[i].id = user.id){
+                    if ($scope.tasks[i].id = task.id){
                         delete $scope.tasks[i];
+                    }
+                }
+            },
+            function errorCallback(response){
+                console.error(response);
+            });
+        }
+
+        // Delete comment
+        $scope.deleteComment = function(comment) {
+            $http.delete('/api/comments/'+comment.id, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                for (var i=0; i < $scope.tasks.comments.length; i++){
+                    if ($scope.tasks.comments[i].id = comment.id){
+                        delete $scope.tasks.comments[i];
                     }
                 }
             },

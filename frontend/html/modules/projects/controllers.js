@@ -58,7 +58,7 @@ angular.module('Project', ['ngCookies'])
                 }
             }).then(function successCallback(response){
                 for (var i=0; i < $scope.projects.length; i++){
-                    if ($scope.projects[i].id = user.id){
+                    if ($scope.projects[i].id = project.id){
                         delete $scope.projects[i];
                     }
                 }
