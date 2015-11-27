@@ -115,6 +115,13 @@ class CommentService {
     }
 
     def delete(String commentId) {
-        commentRepository.delete(commentId)
+        def comment = commentRepository.findOne(commentId)
+        if (comment == null) {
+            throw new EntityNotFoundException("Comment not found.")
+        }
+        for (Comment com : comment.comments){
+            delete(com.id)
+        }
+        commentRepository.delete(comment)
     }
 }

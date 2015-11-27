@@ -3,11 +3,15 @@ package hu.nullpointerexception.stump.service
 import hu.nullpointerexception.stump.exception.DatabaseException
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
+import hu.nullpointerexception.stump.model.Comment
 import hu.nullpointerexception.stump.model.Project
 import hu.nullpointerexception.stump.model.ProjectStatus
 import hu.nullpointerexception.stump.model.Role
+import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.TaskStatus
+import hu.nullpointerexception.stump.repository.CommentRepository
 import hu.nullpointerexception.stump.repository.ProjectRepository
+import hu.nullpointerexception.stump.repository.TaskRepository
 import hu.nullpointerexception.stump.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
@@ -21,11 +25,18 @@ class ProjectService {
 
     private ProjectRepository projectRepository
     private UserRepository userRepository
+    private TaskRepository taskRepository
+    private CommentRepository commentRepository
+    private TaskService taskService
 
     @Autowired
-    ProjectService(ProjectRepository projectRepository, UserRepository userRepository) {
+    ProjectService(ProjectRepository projectRepository,
+                   UserRepository userRepository,
+                   TaskRepository taskRepository,
+                   CommentRepository commentRepository) {
         this.projectRepository = projectRepository
         this.userRepository = userRepository
+        this.taskService = new TaskService(taskRepository, userRepository, projectRepository)
     }
 
     def addProject(Project project, String userId) {
@@ -92,6 +103,17 @@ class ProjectService {
         project.status = ProjectStatus.valueOf(status);
         projectRepository.save(project)
 
+    }
+
+    def delete(String projectId) {
+        Project project = projectRepository.findOne(projectId)
+        if (project == null){
+            throw new EntityNotFoundException("Project not found.")
+        }
+        for (Task task : project.getTasks()){
+            taskService.delete(task.id)
+        }
+        projectRepository.delete(project)
     }
 
     def getProjectsForUser(String userId) {

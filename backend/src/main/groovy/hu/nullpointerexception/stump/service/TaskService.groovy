@@ -2,8 +2,10 @@ package hu.nullpointerexception.stump.service
 
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
+import hu.nullpointerexception.stump.model.Comment
 import hu.nullpointerexception.stump.model.Task
 import hu.nullpointerexception.stump.model.TaskStatus
+import hu.nullpointerexception.stump.repository.CommentRepository
 import hu.nullpointerexception.stump.repository.ProjectRepository
 import hu.nullpointerexception.stump.repository.TaskRepository
 import hu.nullpointerexception.stump.repository.UserRepository
@@ -20,15 +22,19 @@ import java.util.concurrent.ThreadPoolExecutor
 @Service
 class TaskService {
 
-    private TaskRepository taskRepository
-    private UserRepository userRepository
     private ProjectRepository projectRepository
+    private UserRepository userRepository
+    private TaskRepository taskRepository
+    private CommentRepository commentRepository
+    private CommentService commentService
 
     @Autowired
     TaskService(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository) {
         this.taskRepository = taskRepository
         this.userRepository = userRepository
         this.projectRepository = projectRepository
+        this.commentRepository = commentRepository
+        this.commentService = new CommentService(commentRepository, taskRepository, userRepository)
     }
 
     def addTask(Task task, String userId, String projectId) {
@@ -87,6 +93,17 @@ class TaskService {
         task.workTime = task.workTime + workTimeAddition
         taskRepository.save(task)
 
+    }
+
+    def delete(String taskId) {
+        Task task = taskRepository.findOne(taskId)
+        if (task == null){
+            throw new EntityNotFoundException("Comment not found.")
+        }
+        for (Comment comment : task.getComments()){
+            commentService.delete(comment.id)
+        }
+        taskRepository.delete(task)
     }
 
     def getAll() {
