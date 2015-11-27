@@ -91,6 +91,28 @@ angular.module('Task', ['ngCookies'])
             });
         }
 
+        // Create subcomment
+        $scope.addSubComment = function(comment, text) {
+            $http.post('/api/comments', {
+                "commentId": commentId,
+                "text": text
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function successCallback(response){
+                comment.comments.push({
+                    "author": {"name": $scope.loginUser.name},
+                    "timestamp": Date.now(),
+                    "text": text
+                });
+            },
+            function errorCallback(response){
+                alert("Can't add new task!\n"+response.data);
+                console.error(response);
+            });
+        }
+
         // Convert timestamp to date
         $scope.convertToDate = function(timestamp) {
             console.log(timestamp);
