@@ -16,6 +16,7 @@
         <div>
             <button ng-repeat="status in TASK_STATUSES" ng-click="changeTaskStatus(status);" class="btn btn-primary">{{status}}</button>
         </div>
+        <button class="btn btn-info btn-lg" ng-click="addChangeTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Change Task</button><br/>
         <h2>{{selTask.title}}'s comments:</h2>
         <div ng-repeat="comment in selTask.comments">
             <div >
@@ -35,7 +36,7 @@
                         {{subcomment.text}}
                     </div>
                 </div>
-                <button class="btn btn-info btn-lg" ng-click="showCommentDiv();" ng-if="showAddSubComment == false">New Sub Comment</button>
+                <button style="float: right" class="btn btn-info" ng-click="showCommentDiv();" ng-if="showAddSubComment == false">New Sub Comment</button>
                 <div class="modal-content" ng-if="showAddSubComment == true" style="padding: 20px;">
                     Name: {{loginUser.name}}<br/>
                     Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>
@@ -43,9 +44,9 @@
                     <a ng-click="unshowSubCommentDiv();" style="float: right">Cancel</a>
                 </div>
             </div>
-            <button class="btn btn-info btn-lg" ng-click="deleteComment(comment)">Delete Comment</button>
+            <button style="float: right" class="btn btn-info" ng-click="deleteComment(comment)">Delete Comment</button>
         </div>
-        <button class="btn btn-info btn-lg" ng-click="showCommentDiv();" ng-if="showAddComment == false">New Comment</button>
+        <button style="float: left" class="btn btn-info" ng-click="showCommentDiv();" ng-if="showAddComment == false">New Comment</button>
         <div class="modal-content" ng-if="showAddComment == true" style="padding: 20px;">
             Name: {{loginUser.name}}<br/>
             Text: <br/><textarea ng-model="text" class="newComment modal-content"></textarea><br/>
@@ -54,7 +55,6 @@
         </div>
     </div>
 
-    <button class="btn btn-info btn-lg" ng-click="addChangeTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Change Task</button><br/>
     <div id="changeTask" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
