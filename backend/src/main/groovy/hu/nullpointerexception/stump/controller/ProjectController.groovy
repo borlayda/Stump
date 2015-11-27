@@ -61,6 +61,12 @@ class ProjectController {
         return projectJSONEntity
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "{projectId}")
+    def deleteProject(@PathVariable("projecttId") String projectId) {
+        projectService.delete(projectId)
+        return GenericResponse.okResponse()
+    }
+
     @RequestMapping(value = "/change", method = RequestMethod.POST)
     GenericResponse changeProject(@RequestBody ChangeProjectJSONEntity cp) {
         projectService.changeProject(cp.projectId, cp.title, cp.description, cp.ownerId, cp.status)

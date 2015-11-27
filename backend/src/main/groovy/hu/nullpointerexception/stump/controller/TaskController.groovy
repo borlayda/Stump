@@ -52,6 +52,12 @@ class TaskController {
         return taskJSONEntity
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "{taskId}")
+    def deleteTask(@PathVariable("taskId") String taskId) {
+        taskService.delete(taskId)
+        return GenericResponse.okResponse()
+    }
+
     @RequestMapping(value = "/change", method = RequestMethod.POST)
     GenericResponse changeTask(@RequestBody ChangeTaskJSONEntity ct) {
         taskService.changeTask(ct.taskId, ct.title, ct.description, ct.ownerId, ct.status)

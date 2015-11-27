@@ -98,7 +98,7 @@ class TaskService {
     def delete(String taskId) {
         Task task = taskRepository.findOne(taskId)
         if (task == null){
-            throw new EntityNotFoundException("Comment not found.")
+            throw new EntityNotFoundException("Task not found.")
         }
         for (Comment comment : task.getComments()){
             commentService.delete(comment.id)

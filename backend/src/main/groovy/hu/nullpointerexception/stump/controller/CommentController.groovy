@@ -43,7 +43,7 @@ class CommentController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "{commentId}")
-    def addComment(@PathVariable("commentId") String commentId) {
+    def deleteComment(@PathVariable("commentId") String commentId) {
         commentService.delete(commentId)
         return GenericResponse.okResponse()
     }
