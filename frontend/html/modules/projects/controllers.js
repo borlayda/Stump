@@ -6,13 +6,6 @@ angular.module('Project', ['ngCookies'])
     function ($scope, $rootScope, $location, $http, $cookies) {
         $scope.TASK_TYPES = ["ISSUE", "TASK"];
         $scope.PROJECT_STATUSES = ["OPEN", "IN_PROGRESS", "RESOLVED", "REOPENED", "CLOSED"];
-        $scope.projectStatusLayout = {
-             'btn-success': $scope.selProject.status == 'CLOSED',
-             'btn-info': $scope.selProject.status == 'IN_PROGRESS',
-             'btn-success': $scope.selProject.status == 'RESOLVED',
-             'btn-info': $scope.selProject.status == 'OPEN',
-             'btn-warning': $scope.selProject.status == 'REOPENED'
-        };
 
         $http.get('/api/projects').then(function successCallback(response){
             $scope.projects = response.data;

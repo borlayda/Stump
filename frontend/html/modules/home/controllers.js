@@ -11,6 +11,23 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.selTask = {};
         $scope.selProject = {};
 
+        $scope.projectStatusLayout = {
+             'CLOSED':'btn-success',
+             'IN_PROGRESS': 'btn-info',
+             'RESOLVED': 'btn-success',
+             'OPEN':'btn-info',
+             'REOPENED': 'btn-warning'
+        };
+
+        $scope.taskStatusLayout = {
+             'CLOSED':'btn-success',
+             'IN_PROGRESS': 'btn-info',
+             'REVIEW': 'btn-warning',
+             'VERIFYING': 'btn-warning',
+             'OPEN':'btn-info',
+             'TESTING': 'btn-warning'
+        };
+
         $scope.projects = [];
         $scope.tasks = [];
         $scope.users = [];

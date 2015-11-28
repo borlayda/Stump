@@ -7,13 +7,6 @@ angular.module('Task', ['ngCookies'])
         $scope.TASK_TYPES = ["ISSUE", "TASK"];
         $scope.TASK_STATUSES = ["OPEN", "IN_PROGRESS", "REVIEW", "TESTING", "VERIFYING", "CLOSED"]
         $scope.selectUser = []
-        $scope.taskStatusLayout = {
-             'btn-success': $scope.selTask.status == 'CLOSED',
-             'btn-info': $scope.selTask.status == 'IN_PROGRESS',
-             'btn-warning': $scope.selTask.status == 'REVIEW',
-             'btn-info': $scope.selTask.status == 'OPEN',
-             'btn-warning': $scope.selTask.status == 'TESTING'
-        };
 
         $http.get('/api/tasks').then(function successCallback(response){
             $scope.tasks = response.data;
