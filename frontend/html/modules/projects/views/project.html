@@ -5,7 +5,7 @@
             <div class="leftpad col-sm-9 col-md-10 inside no-float">
                 <div class="description">{{selProject.description}}</div>
                 <div>
-                    <button ng-repeat="status in PROJECT_STATUSES" ng-click="changeProjectStatus(status);" class="btn btn-primary">{{status}}</button>
+                    <button ng-repeat="status in PROJECT_STATUSES" ng-click="changeProjectStatus(status);" class="btn" ng-class="projectStatusLayout[status]">{{status}}</button>
                 </div>
                 <h2>Project's tasks:</h2>
                 <table class="table table-striped">
