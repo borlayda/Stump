@@ -12,6 +12,7 @@ import hu.nullpointerexception.stump.transport.ChangeWorkTimeJSONEntity
 import hu.nullpointerexception.stump.transport.CommentJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
+import hu.nullpointerexception.stump.transport.UserChangeJSONEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -73,6 +74,18 @@ class TaskController {
     @RequestMapping(value = "/change-worktime", method = RequestMethod.POST)
     GenericResponse changeWorkTime(@RequestBody ChangeWorkTimeJSONEntity cwt) {
         taskService.addWorkTime(cwt.id, cwt.workTime)
+        return GenericResponse.okResponse()
+    }
+
+    @RequestMapping(value = "/attach/user", method = RequestMethod.POST)
+    GenericResponse attachUser(@RequestBody UserChangeJSONEntity cwt) {
+        taskService.attachUser(cwt.taskId, cwt.userId)
+        return GenericResponse.okResponse()
+    }
+
+    @RequestMapping(value = "/detach/user", method = RequestMethod.POST)
+    GenericResponse detachUser(@RequestBody UserChangeJSONEntity cwt) {
+        taskService.detachUser(cwt.taskId, cwt.userId)
         return GenericResponse.okResponse()
     }
 

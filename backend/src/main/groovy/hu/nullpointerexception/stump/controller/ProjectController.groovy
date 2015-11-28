@@ -13,6 +13,7 @@ import hu.nullpointerexception.stump.transport.ChangeTaskJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.ProjectJSONEntity
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
+import hu.nullpointerexception.stump.transport.UserChangeJSONEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -76,6 +77,18 @@ class ProjectController {
     @RequestMapping(value = "/change-status", method = RequestMethod.POST)
     GenericResponse changeStatus(@RequestBody ChangeStatusJSONEntity csje) {
         projectService.changeStatus(csje.id, csje.status)
+        return GenericResponse.okResponse()
+    }
+
+    @RequestMapping(value = "/attach/user", method = RequestMethod.POST)
+    GenericResponse attachUser(@RequestBody UserChangeJSONEntity cwt) {
+        projectService.attachUser(cwt.projectId, cwt.userId)
+        return GenericResponse.okResponse()
+    }
+
+    @RequestMapping(value = "/detach/user", method = RequestMethod.POST)
+    GenericResponse detachUser(@RequestBody UserChangeJSONEntity cwt) {
+        projectService.detachUser(cwt.projectId, cwt.userId)
         return GenericResponse.okResponse()
     }
 

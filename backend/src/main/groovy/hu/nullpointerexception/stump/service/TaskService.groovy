@@ -85,6 +85,32 @@ class TaskService {
 
     }
 
+    def attachUser(String taskId, String userId){
+        def task = taskRepository.findOne(taskId)
+        if (task == null) {
+            throw new EntityNotFoundException("Task not found")
+        }
+        def user = userRepository.findOne(userId)
+        if (user == null) {
+            throw new EntityNotFoundException("User not found")
+        }
+        task.users.add(user)
+        taskRepository.save(task)
+    }
+
+    def detachUser(String taskId, String userId){
+        def task = taskRepository.findOne(taskId)
+        if (task == null) {
+            throw new EntityNotFoundException("Task not found")
+        }
+        def user = userRepository.findOne(userId)
+        if (user == null) {
+            throw new EntityNotFoundException("User not found")
+        }
+        task.users.remove(user)
+        taskRepository.save(task)
+    }
+
     def addWorkTime(String taskId, Long workTimeAddition) {
         def task = taskRepository.findOne(taskId)
         if (task == null) {

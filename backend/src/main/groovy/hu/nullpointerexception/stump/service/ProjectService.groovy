@@ -72,6 +72,32 @@ class ProjectService {
 
     }
 
+    def attachUser(String projectId, String userId){
+        def project = projectRepository.findOne(projectId)
+        if (project == null) {
+            throw new EntityNotFoundException("Project not found")
+        }
+        def user = userRepository.findOne(userId)
+        if (user == null) {
+            throw new EntityNotFoundException("User not found")
+        }
+        project.users.add(user)
+        projectRepository.save(project)
+    }
+
+    def detachUser(String projectkId, String userId){
+        def project = projectRepository.findOne(projectId)
+        if (project == null) {
+            throw new EntityNotFoundException("Project not found")
+        }
+        def user = userRepository.findOne(userId)
+        if (user == null) {
+            throw new EntityNotFoundException("User not found")
+        }
+        project.users.remove(user)
+        projectRepository.save(project)
+    }
+
     def connectProjectAndUser(String projectId, String userId) {
         def user = userRepository.findOne(userId)
         def project = projectRepository.findOne(projectId)
