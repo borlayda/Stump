@@ -4,9 +4,6 @@
         <div class="row">
             <div class="leftpad col-sm-9 col-md-10 inside no-float">
                 <div class="description">{{selTask.description}}</div>
-                <div>
-                    <button ng-repeat="status in TASK_STATUSES" ng-click="changeTaskStatus(status);" class="btn" ng-class="taskStatusLayout[status]">{{status}}</button>
-                </div>
                 <button class="btn btn-info" ng-click="addChangeTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Change Task</button><br/>
                 <h2>{{selTask.title}}'s comments:</h2>
                 <div ng-repeat="comment in selTask.comments">
@@ -46,8 +43,10 @@
                 </div>
             </div>
             <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
-                <div ng-class="taskStatusLayout[selTask.status]">
-                    <h4 style="padding: 10px;">{{selTask.status}}</h4>
+                <div>
+                    <select ng-class="taskStatusLayout[selTask.status]" ng-model="selTask.status" ng-change="changeTaskStatus(selTask.status);">
+                        <option ng-repeat="status in TASK_STATUSES" class="btn btn-mini" ng-class="taskStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4></option>
+                    </select>
                 </div>
                 <p>Users on this project:</p>
                 <p ng-repeat="user in selTask.users">

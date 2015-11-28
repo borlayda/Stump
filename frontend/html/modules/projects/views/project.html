@@ -4,9 +4,6 @@
         <div class="row container-fluid">
             <div class="leftpad col-sm-9 col-md-10 inside no-float">
                 <div class="description">{{selProject.description}}</div>
-                <div>
-                    <button ng-repeat="status in PROJECT_STATUSES" ng-click="changeProjectStatus(status);" class="btn" ng-class="projectStatusLayout[status]">{{status}}</button>
-                </div>
                 <h2>Project's tasks:</h2>
                 <table class="table table-striped">
                     <tr>
@@ -26,8 +23,10 @@
                 <button class="btn btn-info" ng-click="addChangeProjectWindow();" ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project</button><br/>
             </div>
             <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
-                <div ng-class="projectStatusLayout[selProject.status]">
-                    <h4 style="padding: 10px;">{{selProject.status}}</h4>
+                <div>
+                    <select ng-class="projectStatusLayout[selProject.status]" ng-model="selProject.status" ng-change="changeProjectStatus(selProject.status);">
+                        <option ng-repeat="status in PROJECT_STATUSES" class="btn btn-mini" ng-class="projectStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4></option>
+                    </select>
                 </div>
                 <p>Users on this project:</p>
                 <p ng-repeat="user in selProject.users">
