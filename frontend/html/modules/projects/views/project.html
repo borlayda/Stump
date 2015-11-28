@@ -22,8 +22,8 @@
                         <td ng-class="{'btn-success': task.status == 'CLOSED', 'btn-info': task.status == 'OPEN', 'btn-warning': task.status == 'REOPENED'}">{{task.status}}</td>
                     </tr>
                 </table>
-                <button class="btn btn-info btn-lg" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Create Task</button><br/>
-                <button class="btn btn-info btn-lg" ng-click="addChangeProjectWindow();" ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project</button><br/>
+                <button class="btn btn-info" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Create Task</button><br/>
+                <button class="btn btn-info" ng-click="addChangeProjectWindow();" ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project</button><br/>
             </div>
             <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
                 <div ng-class="projectStatusLayout">
