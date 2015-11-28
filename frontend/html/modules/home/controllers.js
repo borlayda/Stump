@@ -6,6 +6,7 @@ angular.module('Dashboard', ['ngCookies'])
     function ($scope, $rootScope, $location, $cookies, $window, $http) {
         $scope.dashboardHTMLActive = 'projects';
         $scope.dashboardPartActive = 'projects';
+        $scope.Math = window.Math;
         $scope.USER_ROLES = ['ADMIN', 'PM', 'DEVELOPER', 'TESTER'];
 
         $scope.selTask = {};

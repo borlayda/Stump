@@ -42,15 +42,18 @@
                     <a ng-click="unshowCommentDiv();" style="float: right">Cancel</a>
                 </div>
             </div>
-            <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
+            <inp class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
                 <div>
                     <select ng-class="taskStatusLayout[selTask.status]" ng-model="selTask.status" ng-change="changeTaskStatus(selTask.status);">
                         <option ng-repeat="status in TASK_STATUSES" class="btn btn-mini" ng-class="taskStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4></option>
                     </select>
                 </div>
                 <p>Owner: {{selTask.owner.name}}</p>
-                <p>Working Time: <input type="text"  ng-model="minute" value="0+parseInt({{selTask.workTime/60}})" size="3"/>:<input type="text"  ng-model="second" value="0+{{selTask.workTime%60}}" size="2"/></p>
-                <button ng-click="addWorkTime(pasreInt(minute)*60+parseInt(second));" class="btn btn-primary">Add workTime</button>
+                <div>Working Time: {{Math.floor(selTask.workTime/60)}}:{{selTask.workTime%60}}<br/>
+                    <input type="number" ng-model="minute" min="0" max="1440" value="0"/>:
+                    <input type="number" ng-model="second" min="0" max="59" value="0"/>
+                </div>
+                <button ng-click="addWorkTime(minute*60+second);" class="btn btn-primary">Add workTime</button>
             </div>
 
         </div>
