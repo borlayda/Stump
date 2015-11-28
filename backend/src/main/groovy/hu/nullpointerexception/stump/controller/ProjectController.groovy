@@ -62,7 +62,7 @@ class ProjectController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "{projectId}")
-    def deleteProject(@PathVariable("projecttId") String projectId) {
+    def deleteProject(@PathVariable("projectId") String projectId) {
         projectService.delete(projectId)
         return GenericResponse.okResponse()
     }
