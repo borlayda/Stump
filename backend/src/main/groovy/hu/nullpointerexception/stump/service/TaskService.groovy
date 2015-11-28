@@ -29,7 +29,7 @@ class TaskService {
     private CommentService commentService
 
     @Autowired
-    TaskService(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository) {
+    TaskService(TaskRepository taskRepository, UserRepository userRepository, CommentRepository commentRepository, ProjectRepository projectRepository) {
         this.taskRepository = taskRepository
         this.userRepository = userRepository
         this.projectRepository = projectRepository
@@ -122,12 +122,15 @@ class TaskService {
     }
 
     def delete(String taskId) {
-        Task task = taskRepository.findOne(taskId)
+        def task = taskRepository.findOne(taskId)
         if (task == null){
             throw new EntityNotFoundException("Task not found.")
         }
-        for (Comment comment : task.getComments()){
-            commentService.delete(comment.id)
+        task.comments.each {
+            def comment = commentRepository.findOne(it.id)
+            if (comment != null) {
+                commentService.delete(comment.id)
+            }
         }
         taskRepository.delete(task)
     }

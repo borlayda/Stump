@@ -36,7 +36,9 @@ class ProjectService {
                    CommentRepository commentRepository) {
         this.projectRepository = projectRepository
         this.userRepository = userRepository
-        this.taskService = new TaskService(taskRepository, userRepository, projectRepository)
+        this.taskRepository = taskRepository
+        this.commentRepository = commentRepository
+        this.taskService = new TaskService(taskRepository, userRepository, commentRepository, projectRepository)
     }
 
     def addProject(Project project, String userId) {
@@ -147,12 +149,22 @@ class ProjectService {
     }
 
     def delete(String projectId) {
-        Project project = projectRepository.findOne(projectId)
+        def project = projectRepository.findOne(projectId)
         if (project == null){
             throw new EntityNotFoundException("Project not found.")
         }
-        for (Task task : project.getTasks()){
-            taskService.delete(task.id)
+        project.users.each {
+            def u = userRepository.findOne(it.id)
+            if (u != null) {
+                u.projects?.remove(project)
+                userRepository.save(u)
+            }
+        }
+        project.tasks.each {
+            def task = taskRepository.findOne(it.id)
+            if (task != null) {
+                taskService.delete(task.id)
+            }
         }
         projectRepository.delete(project)
     }
