@@ -1,37 +1,44 @@
 <div class="project" ng-controller="ProjectController">
     <div class="projectProperties">
         <h1>{{selProject.title}}</h1>
-        <div style="float: right; width: 150px;">
-            <div ng-class="projectStatusLayout">
-                <h4 style="padding: 10px;">{{selProject.status}}</h4>
+        <div class="row container-fluid">
+            <div class="leftpad col-sm-9 col-md-10 inside no-float">
+                <div class="description">{{selProject.description}}</div>
+                <div>
+                    <button ng-repeat="status in PROJECT_STATUSES" ng-click="changeProjectStatus(status);" class="btn btn-primary">{{status}}</button>
+                </div>
+                <h2>Project's tasks:</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr ng-repeat="task in selProject.tasks">
+                        <td><a ng-click="getTaskView(task);">{{task.title}}</td>
+                        <td>{{task.description}}</td>
+                        <td>{{task.owner.name}}</td>
+                        <td ng-class="{'btn-success': task.status == 'CLOSED', 'btn-info': task.status == 'OPEN', 'btn-warning': task.status == 'REOPENED'}">{{task.status}}</td>
+                    </tr>
+                </table>
+                <button class="btn btn-info btn-lg" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Create Task</button><br/>
+                <button class="btn btn-info btn-lg" ng-click="addChangeProjectWindow();" ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project</button><br/>
             </div>
-            <p>Users on this project:</p>
-            <p ng-repeat="user in selProject.users">
-                <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
-            </p>
+            <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
+                <div ng-class="projectStatusLayout">
+                    <h4 style="padding: 10px;">{{selProject.status}}</h4>
+                </div>
+                <p>Users on this project:</p>
+                <p ng-repeat="user in users">
+                    <span>{{user.name}}</span>
+                </p>
+            </div>
         </div>
-        <div class="description">{{selProject.description}}</div>
-        <div>
-            <button ng-repeat="status in PROJECT_STATUSES" ng-click="changeTaskStatus(status);" class="btn btn-primary">{{status}}</button>
-        </div>
-        <h2>Project's tasks:</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Owner</th>
-                <th>Status</th>
-            </tr>
-            <tr ng-repeat="task in selProject.tasks">
-                <td><a ng-click="getTaskView(task);">{{task.title}}</td>
-                <td>{{task.description}}</td>
-                <td>{{task.owner.name}}</td>
-                <td ng-class="{'btn-success': task.status == 'CLOSED', 'btn-info': task.status == 'OPEN', 'btn-warning': task.status == 'REOPENED'}">{{task.status}}</td>
-            </tr>
-        </table>
+
     </div>
 
-    <button class="btn btn-info btn-lg" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Create Task</button><br/>
+    <!-- Create new task on project modal window -->
     <div id="createTask" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -63,7 +70,7 @@
         </div>
     </div>
 
-    <button class="btn btn-info btn-lg" ng-click="addChangeProjectWindow();" ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project</button><br/>
+    <!-- Change project properties modal window -->
     <div id="changeProject" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

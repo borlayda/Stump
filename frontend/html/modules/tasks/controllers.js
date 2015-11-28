@@ -6,6 +6,7 @@ angular.module('Task', ['ngCookies'])
     function ($scope, $rootScope, $location, $http, $cookies) {
         $scope.TASK_TYPES = ["ISSUE", "TASK"];
         $scope.TASK_STATUSES = ["OPEN", "IN_PROGRESS", "REVIEW", "TESTING", "VERIFYING", "CLOSED"]
+        $scope.selectUser = []
         $scope.taskStatusLayout = {
              'btn-success': $scope.selTask.status == 'CLOSED',
              'btn-info': $scope.selTask.status == 'IN_PROGRESS',
