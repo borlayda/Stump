@@ -55,7 +55,7 @@ class ProjectService {
 
     }
 
-    def changeProject(String projectId, String title, String descrition, String ownerId, String status) {
+    def changeProject(String projectId, String title, String descrition, String ownerId, String status, List<String> userIds) {
         def project = projectRepository.findOne(projectId)
         if (project == null) {
             throw new EntityNotFoundException("Task not found")
@@ -68,8 +68,23 @@ class ProjectService {
         project.title = title
         project.description = descrition
         project.owner = owner
+        project.users.each {
+            def u = userRepository.findOne(it.id)
+            if (u != null) {
+                u.projects?.remove(project)
+                userRepository.save(u)
+            }
+        }
+        project.users = []
+        userIds.each {
+            def user = userRepository.findOne(it)
+            project.users << user
+            if (user.projects != null && !user.projects.contains(project)) {
+                user.projects << project
+                userRepository.save(user)
+            }
+        }
         projectRepository.save(project)
-
     }
 
     def attachUser(String projectId, String userId){
@@ -151,6 +166,8 @@ class ProjectService {
     }
 
     def getProject(String projectId) {
-        projectRepository.findOne(projectId)
+        def p = projectRepository.findOne(projectId)
+        p.getUsers().size()
+        p
     }
 }

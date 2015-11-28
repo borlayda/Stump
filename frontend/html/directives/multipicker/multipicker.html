@@ -1,0 +1,40 @@
+<div class="multipicker-selector-wrapper">
+    <div class="multipicker-not-selected">
+        <div class="multipicker-header">
+            Nem hozzáadott elemek:
+        </div>
+        <div ng-click="addItem(item)" ng-repeat="item in notSelectedItems">
+            <div class="multipicker-item" ng-if="displayAttr">
+                                <span>
+                    {{item[displayAttr]}}
+                </span>
+                <span class="icon">
+                    +
+                </span>
+            </div>
+            <div class="multipicker-item" ng-if="!displayAttr">
+                {{item}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="multipicker-selector-wrapper">
+    <div class="multipicker-header">
+        Hozzáadott elemek:
+    </div>
+    <div class="multipicker-selected">
+        <div ng-click="removeItem(item)" ng-repeat="item in selectedItems">
+            <div class="multipicker-item" ng-if="displayAttr">
+                <span>
+                    {{item[displayAttr]}}
+                </span>
+                <span class="icon">
+                    -
+                </span>
+            </div>
+            <div class="multipicker-item" ng-if="!displayAttr">
+                {{item}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,7 +12,8 @@ angular.module('DashboardBase', [
     'Project',
     'Task',
     'ngRoute',
-    'ngCookies'
+    'ngCookies',
+    'multipicker'
 ])
 
 .config(['$routeProvider', function ($routeProvider) {

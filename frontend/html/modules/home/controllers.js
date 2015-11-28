@@ -47,7 +47,7 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.logout = function () {
              console.log("Logging out ...");
              $window.location.assign("/#/login");
-        }
+        };
 
         // Get specific task
         $scope.getTask = function(task){
@@ -57,12 +57,12 @@ angular.module('Dashboard', ['ngCookies'])
             function errorCallback(response){
                 console.log("Error on getting task");
             });
-        }
+        };
 
         $scope.getTaskView = function (task) {
             $scope.getTask(task);
             $scope.switchActivePart("tasks", "task");
-        }
+        };
 
         // Get specific project
         $scope.getProject = function(project){
@@ -72,12 +72,12 @@ angular.module('Dashboard', ['ngCookies'])
             function errorCallback(response){
                 console.log("Error on getting project");
             });
-        }
+        };
 
         $scope.getProjectView = function (project) {
             $scope.getProject(project);
             $scope.switchActivePart("projects", "project");
-        }
+        };
 
         // Get all users
         $scope.getUsers = function () {
@@ -87,7 +87,7 @@ angular.module('Dashboard', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             });
-        }
+        };
 
         // Get all projects
         $scope.getProjects = function() {
@@ -97,7 +97,7 @@ angular.module('Dashboard', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             })
-        }
+        };
 
         // Get all tasks
         $scope.getTasks = function() {

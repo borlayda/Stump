@@ -31,6 +31,7 @@ class ProjectJSONEntity extends JSONEntity<Project> {
         description = source.description
         owner = new UserJSONEntity(source.owner)
         status = source.status
+        users = []
     }
 
     ProjectJSONEntity() {

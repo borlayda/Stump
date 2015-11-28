@@ -41,7 +41,7 @@ angular.module('Project', ['ngCookies'])
                 alert("Can't add new project!\n"+response.data);
                 console.error(response);
             });
-        }
+        };
 
         // Delete user
         $scope.deleteProject = function(project) {
@@ -80,13 +80,16 @@ angular.module('Project', ['ngCookies'])
         }
 
         // Change Project's data
-        $scope.changeProject = function(projectId, title, description, ownerId, status) {
+        $scope.changeProject = function(projectId, title, description, ownerId, status, selectedUsers) {
             $http.post('/api/projects/change', {
                 "projectId": projectId,
                 "title": title,
                 "description": description,
                 "ownerId": ownerId,
-                "status": status
+                "status": status,
+                "users": selectedUsers.map(function (u) {
+                    return u.id;
+                })
             }, {
                 headers: {
                     "Content-Type": "application/json"
@@ -97,7 +100,7 @@ angular.module('Project', ['ngCookies'])
             function errorCallback(response){
                 console.error(response);
             });
-        }
+        };
 
         // Create task
         $scope.createTask = function(title, description, projectId, type) {
@@ -129,12 +132,12 @@ angular.module('Project', ['ngCookies'])
                 alert("Can't add new task!\n"+response.data);
                 console.error(response);
             });
-        }
+        };
 
         // Modal Windows
         $scope.addCreateTaskWindow = function (){
             $('#createTask').modal('show');
-        }
+        };
         $scope.addCreateProjectWindow = function (){
             $http.get('/api/projects').then(function successCallback(response){
                 $scope.projects = response.data;
@@ -143,9 +146,12 @@ angular.module('Project', ['ngCookies'])
                 console.error(response);
             });
             $('#createProject').modal('show');
-        }
+        };
         $scope.addChangeProjectWindow = function (){
             $('#changeProject').modal('show');
+            $scope.usersNotInProject = $scope.users.filter(function (val) {
+                return $scope.selProject.users.map(function (it) {return it.id}).indexOf(val.id) == -1;
+            });
         }
     }
 ]);

@@ -30,3 +30,45 @@ html {
     margin-top: 20px;
     padding: 20px;
 }
+
+multipicker {
+    display: block;
+    width: 400px;
+    height: 400px;
+}
+
+.multipicker-selected {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+.multipicker-not-selected {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.multipicker-selector-wrapper {
+    display: inline-block;
+    width: 48%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.multipicker-header {
+    color: #CCCCCC;
+}
+
+.multipicker-item {
+    cursor: pointer;
+    width: 100%;
+}
+
+.multipicker-item .icon {
+    visibility: hidden;
+    float: right;
+}
+
+.multipicker-item:hover .icon {
+    visibility: visible;
+}

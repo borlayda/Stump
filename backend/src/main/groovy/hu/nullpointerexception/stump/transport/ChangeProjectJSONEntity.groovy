@@ -14,8 +14,14 @@ class ChangeProjectJSONEntity {
     String description
     String status
     String ownerId
+    List<String> users
 
-    ChangeProjectJSONEntity(String projectId, String title, String description, String status, String ownerId) {
+    ChangeProjectJSONEntity(String projectId,
+                            String title,
+                            String description,
+                            String status,
+                            String ownerId,
+                            List<String> users) {
 
         projectId = projectId
         title = title

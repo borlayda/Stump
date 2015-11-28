@@ -88,12 +88,16 @@
                         Owner: <select ng-model="selProject.owner.id" ng-init="getUsers()">
                             <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
                         </select><br/>
-                    </select><br/>
+                    <br/>
+                        <multipicker display-attr="name"
+                                     selected-items="selProject.users"
+                                     not-selected-items="usersNotInProject">
+                        </multipicker>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="changeProject(selProject.id, selProject.title, selProject.description, selProject.owner.id, selProject.status);" data-dismiss="modal">Change Project</button><br/>
+                        <button class="btn pull-left" ng-click="changeProject(selProject.id, selProject.title, selProject.description, selProject.owner.id, selProject.status, selProject.users);" data-dismiss="modal">Change Project</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>

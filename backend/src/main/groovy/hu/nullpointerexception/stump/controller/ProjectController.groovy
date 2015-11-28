@@ -3,17 +3,15 @@ package hu.nullpointerexception.stump.controller
 import hu.nullpointerexception.stump.exception.EntityAlreadyExistsException
 import hu.nullpointerexception.stump.exception.EntityNotFoundException
 import hu.nullpointerexception.stump.exception.StumpException
-import hu.nullpointerexception.stump.model.Project
 import hu.nullpointerexception.stump.security.StumpPrincipal
 import hu.nullpointerexception.stump.service.ProjectService
 import hu.nullpointerexception.stump.transport.ChangeProjectJSONEntity
-import hu.nullpointerexception.stump.transport.ChangeRoleJSONEntity
 import hu.nullpointerexception.stump.transport.ChangeStatusJSONEntity
-import hu.nullpointerexception.stump.transport.ChangeTaskJSONEntity
 import hu.nullpointerexception.stump.transport.GenericResponse
 import hu.nullpointerexception.stump.transport.ProjectJSONEntity
 import hu.nullpointerexception.stump.transport.TaskJSONEntity
 import hu.nullpointerexception.stump.transport.UserChangeJSONEntity
+import hu.nullpointerexception.stump.transport.UserJSONEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -58,7 +56,8 @@ class ProjectController {
             throw new EntityNotFoundException("Project with id '" + projectId + "' not found.")
         }
         def projectJSONEntity = new ProjectJSONEntity(project)
-        projectJSONEntity.tasks = project.getTasks().collect {t -> new TaskJSONEntity(t)}
+        projectJSONEntity.tasks = project.tasks.collect {t -> new TaskJSONEntity(t)}
+        projectJSONEntity.users = project.users.collect {t -> new UserJSONEntity(t)}
         return projectJSONEntity
     }
 
@@ -70,7 +69,7 @@ class ProjectController {
 
     @RequestMapping(value = "/change", method = RequestMethod.POST)
     GenericResponse changeProject(@RequestBody ChangeProjectJSONEntity cp) {
-        projectService.changeProject(cp.projectId, cp.title, cp.description, cp.ownerId, cp.status)
+        projectService.changeProject(cp.projectId, cp.title, cp.description, cp.ownerId, cp.status, cp.users)
         return GenericResponse.okResponse()
     }
 
