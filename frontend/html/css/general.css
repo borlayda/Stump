@@ -34,7 +34,7 @@ html {
 multipicker {
     display: block;
     width: 400px;
-    height: 400px;
+    height: 200px;
 }
 
 .multipicker-selected {
