@@ -85,7 +85,7 @@ angular.module('User', ['ngCookies'])
         $scope.changeRole = function(id, newRole) {
             $http.post('/api/users/change-role', {
                 'userId':id,
-                'role': newRole
+                'newRole': newRole
             },{
                 headers: {
                     "Content-Type": "application/json"
