@@ -5,6 +5,7 @@ angular.module('User', ['ngCookies'])
     ['$scope', '$rootScope', '$location', '$http',
     function ($scope, $rootScope, $location, $http) {
         $scope.selUser = {};
+        $scope.USER_ROLES = ['ADMIN', 'PM', 'DEVELOPER', 'TESTER'];
 
         $http.get('/api/users').then(function successCallback(response){
             $scope.users = response.data;
