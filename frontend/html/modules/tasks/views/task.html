@@ -50,7 +50,7 @@
                     <h4 style="padding: 10px;">{{selTask.status}}</h4>
                 </div>
                 <p>Users on this project:</p>
-                <p ng-repeat="user in users">
+                <p ng-repeat="user in selTask.users">
                     <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
                 </p>
                 <a ng-click="attachUser(selectUser)">Change users on task</a>
