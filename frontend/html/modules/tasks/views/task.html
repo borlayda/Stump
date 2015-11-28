@@ -48,11 +48,7 @@
                         <option ng-repeat="status in TASK_STATUSES" class="btn btn-mini" ng-class="taskStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4></option>
                     </select>
                 </div>
-                <p>Users on this project:</p>
-                <p ng-repeat="user in selTask.users">
-                    <span>{{user.name}} ({{user.email}}) [{{user.role}}]</span>
-                </p>
-                <a ng-click="attachUser(selectUser)">Change users on task</a>
+                <p>Owner: {{selTask.owner.name}}</p>
                 <p>Working Time: <input type="text"  ng-model="minute" value="0+parseInt({{selTask.workTime/60}})" size="3"/>:<input type="text"  ng-model="second" value="0+{{selTask.workTime%60}}" size="2"/></p>
                 <button ng-click="addWorkTime(pasreInt(minute)*60+parseInt(second));" class="btn btn-primary">Add workTime</button>
             </div>
