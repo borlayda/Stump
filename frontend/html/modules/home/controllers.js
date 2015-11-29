@@ -52,7 +52,7 @@ angular.module('Dashboard', ['ngCookies'])
             $scope.loginUser = response.data;
         },
         function errorCallback(response){
-            alert(response);
+            alert(response.data.message);
         });
 
         $scope.switchActivePart = function(part, html) {
@@ -100,7 +100,7 @@ angular.module('Dashboard', ['ngCookies'])
                 $scope.users = response.data;
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         };
 
@@ -110,7 +110,7 @@ angular.module('Dashboard', ['ngCookies'])
                 $scope.projects = response.data;
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             })
         };
 
@@ -120,7 +120,7 @@ angular.module('Dashboard', ['ngCookies'])
                 $scope.tasks = response.data;
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             })
         }
     }

@@ -10,7 +10,7 @@ angular.module('User', ['ngCookies'])
             $scope.users = response.data;
         },
         function errorCallback(response){
-            alert(response);
+            alert(response.data.message);
         });
 
         // Create user
@@ -38,7 +38,7 @@ angular.module('User', ['ngCookies'])
             },
             function errorCallback(response){
                 alert("Can't add new user!\n"+response.data);
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -58,7 +58,7 @@ angular.module('User', ['ngCookies'])
                 }
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -76,7 +76,7 @@ angular.module('User', ['ngCookies'])
                 console.log("Password changed!");
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -93,7 +93,7 @@ angular.module('User', ['ngCookies'])
                 console.log("Role changed!");
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 

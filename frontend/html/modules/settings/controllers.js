@@ -9,7 +9,7 @@ angular.module('Settings', ['ngCookies'])
             $scope.loginUser = response.data;
         },
         function errorCallback(response){
-            alert(response);
+            alert(response.data.message);
         });
 
         // Change password
@@ -26,7 +26,7 @@ angular.module('Settings', ['ngCookies'])
                 console.log("Password changed!");
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -43,7 +43,7 @@ angular.module('Settings', ['ngCookies'])
                 console.log("Role changed!");
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 

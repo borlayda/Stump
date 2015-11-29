@@ -12,7 +12,7 @@ angular.module('Task', ['ngCookies'])
             $scope.tasks = response.data;
         },
         function errorCallback(response){
-            alert(response);
+            alert(response.data.message);
         });
         $scope.showAddComment = false;
 
@@ -57,14 +57,14 @@ angular.module('Task', ['ngCookies'])
                     }, 0);
                 },
                 function errorCallback(response){
-                    alert(response);
+                    alert(response.data.message);
                 });
                 $scope.title = "";
                 $scope.description = "";
                 $scope.type = "";
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -82,7 +82,7 @@ angular.module('Task', ['ngCookies'])
             },
             function errorCallback(response){
                 alert("Can't add new task!\n"+response.data);
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -100,7 +100,7 @@ angular.module('Task', ['ngCookies'])
             },
             function errorCallback(response){
                 alert("Can't add new task!\n"+response.data);
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -137,7 +137,7 @@ angular.module('Task', ['ngCookies'])
                 $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -154,7 +154,7 @@ angular.module('Task', ['ngCookies'])
                 $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -173,7 +173,7 @@ angular.module('Task', ['ngCookies'])
                 $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -191,11 +191,11 @@ angular.module('Task', ['ngCookies'])
                     }, 0);
                 },
                 function errorCallback(response){
-                    alert(response);
+                    alert(response.data.message);
                 });
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
@@ -209,7 +209,7 @@ angular.module('Task', ['ngCookies'])
                 $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
-                alert(response);
+                alert(response.data.message);
             });
         }
 
