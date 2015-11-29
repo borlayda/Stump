@@ -16,8 +16,6 @@ angular.module('Project', ['ngCookies'])
 
         // Create user
         $scope.createProject = function(title, description) {
-            console.log($scope.loginUser);
-            console.log($scope.projects);
             $http.post('/api/projects', {
                 "title": title,
                 "description": description,
@@ -124,7 +122,6 @@ angular.module('Project', ['ngCookies'])
             $('#createTask').modal('show');
         };
         $scope.addCreateProjectWindow = function (){
-            $scope.showError('hello World');
             $http.get('/api/projects').then(function successCallback(response){
                 $scope.projects = response.data;
             },

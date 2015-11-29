@@ -1,7 +1,7 @@
 <div class="tasks" ng-controller="TaskController">
     <div class="taskList">
         <h1>Tasks</h1>
-        <table class="table table-striped">
+        <table class="table table-striped" ng-init="getTasks();">
             <tr>
                 <th>Title</th>
                 <th>Owner</th>
@@ -10,7 +10,7 @@
                 <th>WorkTime</th>
                 <th ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'">Delete</th>
             </tr>
-            <tr ng-repeat="task in tasks" ng-init="getTasks();">
+            <tr ng-repeat="task in tasks">
                 <td><a ng-click="getTaskView(task);">{{task.title}}</a></td>
                 <td>{{task.owner.name}}</td>
                 <td>{{task.description}}</td>

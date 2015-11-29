@@ -1,7 +1,7 @@
 <div class="projects" ng-controller="ProjectController">
     <div class="projectList">
         <h1>Projects</h1>
-        <table class="table table-striped">
+        <table class="table table-striped" ng-init="getProjects();">
             <tr>
                 <th>Title</th>
                 <th>Owner</th>
@@ -9,7 +9,7 @@
                 <th>Status</th>
                 <th ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'">Delete</th>
             </tr>
-            <tr ng-repeat="project in projects" ng-init="getProjects();">
+            <tr ng-repeat="project in projects">
                 <td><a ng-click="getProjectView(project);">{{project.title}}</a></td>
                 <td>{{project.owner.name}}</td>
                 <td>{{project.description}}</td>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                     <div style="float: left">
-                        <button class="btn pull-left" ng-click="createProject(title, description); getProjects();" data-dismiss="modal">Create Project</button><br/>
+                        <button class="btn pull-left" ng-click="createProject(title, description);" data-dismiss="modal">Create Project</button><br/>
                     </div>
                     <div style="float: right">
                         <button class="btn pull-right" data-dismiss="modal">Close</button>
