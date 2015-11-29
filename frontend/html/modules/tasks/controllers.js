@@ -50,13 +50,10 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.tasks.push({
-                    "title": title,
-                    "description": description,
-                    "owner": {"id":$scope.loginUser.id},
-                    "status": 'OPEN',
-                    "type": type
-                });
+                $scope.getTasks();
+                $scope.title = "";
+                $scope.description = "";
+                $scope.type = "";
             },
             function errorCallback(response){
                 console.error(response);
@@ -73,11 +70,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.selTask.comments.push({
-                    "author": {"name": $scope.loginUser.name},
-                    "timestamp": Date.now(),
-                    "text": text
-                });
+                $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
                 alert("Can't add new task!\n"+response.data);
@@ -95,11 +88,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                comment.comments.push({
-                    "author": {"name": $scope.loginUser.name},
-                    "timestamp": Date.now(),
-                    "text": text
-                });
+                $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
                 alert("Can't add new task!\n"+response.data);
@@ -137,7 +126,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                console.log("Done!" + response.data);
+                $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
                 console.error(response);
@@ -154,7 +143,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.selTask.status = status;
+                $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
                 console.error(response);
@@ -173,7 +162,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.selTask.workTime = $scope.selTask.workTime + workTime;
+                $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
                 console.error(response);
@@ -187,11 +176,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                for (var i=0; i < $scope.tasks.length; i++){
-                    if ($scope.tasks[i].id = task.id){
-                        delete $scope.tasks[i];
-                    }
-                }
+                $scope.getTasks();
             },
             function errorCallback(response){
                 console.error(response);
@@ -205,11 +190,7 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                for (var i=0; i < $scope.tasks.comments.length; i++){
-                    if ($scope.tasks.comments[i].id = comment.id){
-                        delete $scope.tasks.comments[i];
-                    }
-                }
+                $scope.getTask($scope.selTask);
             },
             function errorCallback(response){
                 console.error(response);

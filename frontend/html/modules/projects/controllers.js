@@ -28,12 +28,7 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.projects.push({
-                    "title": title,
-                    "description": description,
-                    "ownerId": $scope.loginUser.id,
-                    "status": 'OPEN'
-                });
+                $scope.getProjects();
                 $scope.title = "";
                 $scope.description = "";
             },
@@ -50,11 +45,7 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                for (var i=0; i < $scope.projects.length; i++){
-                    if ($scope.projects[i].id = project.id){
-                        delete $scope.projects[i];
-                    }
-                }
+                $scope.getProjects();
             },
             function errorCallback(response){
                 console.error(response);
@@ -72,7 +63,7 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.selProject.status = status;
+                $scope.getProject($scope.selProject);
             },
             function errorCallback(response){
                 console.error(response);
@@ -95,7 +86,7 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                console.log("Done!" + response.data);
+                $scope.getProject($scope.selProject);
             },
             function errorCallback(response){
                 console.error(response);
@@ -118,13 +109,7 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.selProject.tasks.push({
-                    "title": title,
-                    "description": description,
-                    "owner": {"id":$scope.loginUser.id},
-                    "status": 'OPEN',
-                    "type": type
-                });
+                $scope.getProject($scope.selProject);
                 $scope.title = "";
                 $scope.description = "";
             },
