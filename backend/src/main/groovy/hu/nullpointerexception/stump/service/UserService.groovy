@@ -39,7 +39,7 @@ class UserService {
      * @param user
      * @return the persisted user
      */
-    @CacheEvict
+    @CacheEvict("default")
     def addUser(User user) throws EntityAlreadyExistsException {
         user.password = passwordEncoder.encode(user.password)
         try {
@@ -50,7 +50,7 @@ class UserService {
 
     }
 
-    @CacheEvict
+    @CacheEvict("default")
     def changePassword(String userId, String oldPassword, String newPassword) {
         def user = userRepository.findOne(userId)
         if (user == null) {
@@ -63,7 +63,7 @@ class UserService {
         userRepository.save(user)
     }
 
-    @CacheEvict
+    @CacheEvict("default")
     def changeRole(String userId, String newRole) {
         def user = userRepository.findOne(userId)
         if (user == null) {
@@ -73,7 +73,7 @@ class UserService {
         userRepository.save(user)
     }
 
-    @CacheEvict
+    @CacheEvict("default")
     def deleteUser(String userId) {
         def user = userRepository.findOne(userId)
         if (user == null) {
