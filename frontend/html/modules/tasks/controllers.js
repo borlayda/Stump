@@ -50,7 +50,15 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.getTasks();
+                $http.get('/api/tasks').then(function successCallback(response){
+                    setTimeout(function () {
+                        $scope.tasks = response.data;
+                        $scope.$apply();
+                    }, 0);
+                },
+                function errorCallback(response){
+                    console.error(response);
+                });
                 $scope.title = "";
                 $scope.description = "";
                 $scope.type = "";
@@ -176,7 +184,15 @@ angular.module('Task', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.getTasks();
+                $http.get('/api/tasks').then(function successCallback(response){
+                    setTimeout(function () {
+                        $scope.tasks = response.data;
+                        $scope.$apply();
+                    }, 0);
+                },
+                function errorCallback(response){
+                    console.error(response);
+                });
             },
             function errorCallback(response){
                 console.error(response);
