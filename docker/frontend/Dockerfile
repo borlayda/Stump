@@ -7,6 +7,9 @@ RUN apt-get -y install apache2 wget
 
 COPY frontend /tmp/frontend
 RUN cp -R /tmp/frontend/html/* /var/www/html
-CMD /usr/bin/service apache2 restart
+COPY init /init
+RUN chmod +x /init
+
+ENTRYPOINT /init
 
 EXPOSE 80
