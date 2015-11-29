@@ -7,6 +7,6 @@ RUN apt-get -y install groovy libspring-*
 
 COPY backend /backend
 RUN cd /backend; ./gradlew build
-RUN cd /backend; java -jar build/lib/stump-0.0.1-SNAPSHOT.jar
+CMD /usr/bin/java -jar /backend/build/libs/stump-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8080
