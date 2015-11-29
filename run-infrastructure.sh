@@ -2,12 +2,12 @@
 
 # Backend
 
-docker run -d -t backend -h backend /bin/bash java -jar /backend/build/lib/*.jar
+docker run -d --hostname backend -t backend
 
 # Frontend
 
-docker run -d -t frontend -h frontend /etc/init.d/apache2 restart
+docker run -d --hostname frontend -t frontend
 
 # Proxy
 
-docker run -d -t proxy -h proxy /bin/bash 
+docker run -d --hostname proxy -t proxy /bin/bash 
