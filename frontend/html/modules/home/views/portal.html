@@ -65,6 +65,9 @@
         <div class="main slide-animate-container col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 inside inside-full-height no-float" ng-app="DashboardChanger">
           <div class="slide-animate" ng-include src="'modules/'+dashboardPartActive+'/views/'+dashboardHTMLActive+'.html'"></div>
         </div>
+        <div class="errorShow" ng-class="{fade: fadeout}" id="errorShow">
+          {{error}}
+        </div>
       </div>
     </div>
 

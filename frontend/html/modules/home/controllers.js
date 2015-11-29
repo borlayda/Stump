@@ -2,12 +2,15 @@
 
 angular.module('Dashboard', ['ngCookies'])
 .controller('DashboardController',
-    ['$scope', '$rootScope', '$location', '$cookies', '$window', '$http',
-    function ($scope, $rootScope, $location, $cookies, $window, $http) {
+    ['$scope', '$rootScope', '$location', '$cookies', '$window', '$http', '$timeout',
+    function ($scope, $rootScope, $location, $cookies, $window, $http, $timeout) {
         $scope.dashboardHTMLActive = 'projects';
         $scope.dashboardPartActive = 'projects';
         $scope.Math = window.Math;
         $scope.USER_ROLES = ['ADMIN', 'PM', 'DEVELOPER', 'TESTER'];
+
+        $scope.error = "";
+        $scope.fadeOut = false;
 
         $scope.selTask = {};
         $scope.selProject = {};
@@ -32,6 +35,17 @@ angular.module('Dashboard', ['ngCookies'])
         $scope.projects = [];
         $scope.tasks = [];
         $scope.users = [];
+
+        $scope.showError = function(error)  {
+            $scope.error = error;
+            $('#errorShow').display = "display";
+            $scope.fadeout = true;
+            $timeout(function(){
+                $scope.hidden = true;
+            }, 2000);
+            $scope.fadeout = false;
+            $("#errorShow").display = "none";
+        }
 
         $scope.loginUser = {};
         $http.get('/api/users/me').then(function successCallback(response){
