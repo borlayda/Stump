@@ -51,7 +51,15 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.getProjects();
+                $http.get('/api/projects').then(function successCallback(response){
+                    setTimeout(function () {
+                        $scope.projects = response.data;
+                        $scope.$apply();
+                    }, 0);
+                },
+                function errorCallback(response){
+                    console.error(response);
+                });
             },
             function errorCallback(response){
                 console.error(response);
