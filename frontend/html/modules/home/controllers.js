@@ -38,13 +38,13 @@ angular.module('Dashboard', ['ngCookies'])
 
         $scope.showError = function(error)  {
             $scope.error = error;
-            $('#errorShow').display = "display";
+            $('#errorShow').css("display", "block");
             $scope.fadeout = true;
             $timeout(function(){
                 $scope.hidden = true;
+                $('#errorShow').css("display", "none");
+                $scope.fadeout = true;
             }, 2000);
-            $scope.fadeout = false;
-            $("#errorShow").display = "none";
         }
 
         $scope.loginUser = {};
