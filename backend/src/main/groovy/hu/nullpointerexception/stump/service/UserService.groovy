@@ -6,6 +6,9 @@ import hu.nullpointerexception.stump.model.Role
 import hu.nullpointerexception.stump.model.User
 import hu.nullpointerexception.stump.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.CachePut
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -24,6 +27,7 @@ class UserService {
         this.passwordEncoder = passwordEncoder
     }
 
+    @Cacheable("default")
     List<User> getAllUsers() {
         userRepository.findAll().asList()
     }
@@ -35,6 +39,7 @@ class UserService {
      * @param user
      * @return the persisted user
      */
+    @CacheEvict
     def addUser(User user) throws EntityAlreadyExistsException {
         user.password = passwordEncoder.encode(user.password)
         try {
@@ -45,6 +50,7 @@ class UserService {
 
     }
 
+    @CacheEvict
     def changePassword(String userId, String oldPassword, String newPassword) {
         def user = userRepository.findOne(userId)
         if (user == null) {
@@ -57,6 +63,7 @@ class UserService {
         userRepository.save(user)
     }
 
+    @CacheEvict
     def changeRole(String userId, String newRole) {
         def user = userRepository.findOne(userId)
         if (user == null) {
@@ -66,6 +73,7 @@ class UserService {
         userRepository.save(user)
     }
 
+    @CacheEvict
     def deleteUser(String userId) {
         def user = userRepository.findOne(userId)
         if (user == null) {
@@ -74,6 +82,7 @@ class UserService {
         userRepository.delete(user)
     }
 
+    @Cacheable("default")
     User getUser(String userId) {
         userRepository.findOne(userId)
     }
