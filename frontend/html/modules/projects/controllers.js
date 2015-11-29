@@ -11,7 +11,7 @@ angular.module('Project', ['ngCookies'])
             $scope.projects = response.data;
         },
         function errorCallback(response){
-            console.error(response);
+            alert(response);
         });
 
         // Create user
@@ -33,14 +33,14 @@ angular.module('Project', ['ngCookies'])
                             }, 0);
                         },
                         function errorCallback(response){
-                            console.error(response);
+                            alert(response);
                         });
                 $scope.title = "";
                 $scope.description = "";
             },
             function errorCallback(response){
                 alert("Can't add new project!\n"+response.data);
-                console.error(response);
+                alert(response);
             });
         };
 
@@ -58,11 +58,11 @@ angular.module('Project', ['ngCookies'])
                     }, 0);
                 },
                 function errorCallback(response){
-                    console.error(response);
+                    alert(response);
                 });
             },
             function errorCallback(response){
-                console.error(response);
+                alert(response);
             });
         }
 
@@ -80,7 +80,7 @@ angular.module('Project', ['ngCookies'])
                 $scope.getProject($scope.selProject);
             },
             function errorCallback(response){
-                console.error(response);
+                alert(response);
             });
         }
 
@@ -103,7 +103,7 @@ angular.module('Project', ['ngCookies'])
                 $scope.getProject($scope.selProject);
             },
             function errorCallback(response){
-                console.error(response);
+                alert(response);
             });
         };
 
@@ -129,12 +129,13 @@ angular.module('Project', ['ngCookies'])
             },
             function errorCallback(response){
                 alert("Can't add new task!\n"+response.data);
-                console.error(response);
+                alert(response);
             });
         };
 
         // Modal Windows
         $scope.addCreateTaskWindow = function (){
+            $scope.showError("hmmm");
             $('#createTask').modal('show');
         };
         $scope.addCreateProjectWindow = function (){
@@ -142,7 +143,7 @@ angular.module('Project', ['ngCookies'])
                 $scope.projects = response.data;
             },
             function errorCallback(response){
-                console.error(response);
+                alert(response);
             });
             $('#createProject').modal('show');
         };

@@ -20,7 +20,7 @@ angular.module('Authentication')
                 if (response.status == 401){
                     $scope.error = "Wrong username or password!";
                 }
-                console.error(response);
+                alert(response);
             }
             );
         };
