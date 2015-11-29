@@ -42,7 +42,7 @@
                     <a ng-click="unshowCommentDiv();" style="float: right">Cancel</a>
                 </div>
             </div>
-            <inp class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
+            <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
                 <div>
                     <select ng-class="taskStatusLayout[selTask.status]" ng-model="selTask.status" ng-change="changeTaskStatus(selTask.status);">
                         <option ng-repeat="status in TASK_STATUSES" class="btn btn-mini" ng-class="taskStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4></option>
