@@ -118,7 +118,7 @@ angular.module('Project', ['ngCookies'])
                     "Content-Type": "application/json"
                 }
             }).then(function successCallback(response){
-                $scope.tasks.push({
+                $scope.selProject.tasks.push({
                     "title": title,
                     "description": description,
                     "owner": {"id":$scope.loginUser.id},
@@ -139,6 +139,7 @@ angular.module('Project', ['ngCookies'])
             $('#createTask').modal('show');
         };
         $scope.addCreateProjectWindow = function (){
+            $scope.showError('hello World');
             $http.get('/api/projects').then(function successCallback(response){
                 $scope.projects = response.data;
             },
