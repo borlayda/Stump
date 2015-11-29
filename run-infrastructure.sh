@@ -2,11 +2,11 @@
 
 # Backend
 
-docker run -d --hostname backend -t backend /bin/bash
+docker run -d --hostname backend -t backend
 
 # Frontend
 
-docker run -d --hostname frontend -t frontend /bin/bash
+docker run -d --hostname frontend -t frontend
 
 # Proxy
 
