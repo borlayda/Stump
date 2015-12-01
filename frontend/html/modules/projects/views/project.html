@@ -32,14 +32,16 @@
             </div>
             <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
                 <div>
-                    <select ng-class="projectStatusLayout[selProject.status]" ng-model="selProject.status"
-                            ng-change="changeProjectStatus(selProject.status);">
-                        <option ng-repeat="status in PROJECT_STATUSES" class="btn btn-mini"
-                                ng-class="projectStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4>
-                        </option>
-                    </select>
+                    Project status: {{selProject.status}}
+                    <!--<select ng-class="projectStatusLayout[selProject.status]" ng-model="selProject.status"-->
+                            <!--ng-change="changeProjectStatus(selProject.status);">-->
+                        <!--<option ng-repeat="status in PROJECT_STATUSES" class="btn btn-mini"-->
+                                <!--ng-class="projectStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4>-->
+                        <!--</option>-->
+                    <!--</select>-->
                 </div>
-                <p>Users on this project:</p>
+                <br>
+                <div>Users on this project:</div>
 
                 <p ng-repeat="user in selProject.users">
                     <span>{{user.name}}</span>
