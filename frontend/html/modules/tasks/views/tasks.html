@@ -11,7 +11,7 @@
                 <th ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'">Delete</th>
             </tr>
             <tr ng-repeat="task in tasks">
-                <td><a ng-click="getTaskView(task);">{{task.title}}</a></td>
+                <td><a style="cursor: pointer" ng-click="getTaskView(task);">{{task.title}}</a></td>
                 <td>{{task.owner.name}}</td>
                 <td>{{task.description}}</td>
                 <td ng-class="taskStatusLayout[task.status]">{{task.status}}</td>

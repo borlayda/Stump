@@ -1,6 +1,7 @@
 <div class="project" ng-controller="ProjectController">
     <div class="projectProperties">
         <h1>{{selProject.title}}</h1>
+
         <div class="row container-fluid">
             <div class="leftpad col-sm-9 col-md-10 inside no-float">
                 <div class="description">{{selProject.description}}</div>
@@ -13,22 +14,33 @@
                         <th>Status</th>
                     </tr>
                     <tr ng-repeat="task in selProject.tasks">
-                        <td><a ng-click="getTaskView(task);">{{task.title}}</td>
+                        <td><a style="cursor: pointer" ng-click="getTaskView(task);">{{task.title}}</td>
                         <td>{{task.description}}</td>
                         <td>{{task.owner.name}}</td>
                         <td ng-class="taskStatusLayout[task.status]">{{task.status}}</td>
                     </tr>
                 </table>
-                <button class="btn btn-info" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">Create Task</button><br/>
-                <button class="btn btn-info" ng-click="addChangeProjectWindow();" ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project</button><br/>
+                <div class="btn-group">
+                    <button class="btn btn-info" ng-click="addCreateTaskWindow();" ng-if="loginUser.role != 'DEVELOPER'">
+                        Create Task
+                    </button>
+                    <button class="btn btn-info" ng-click="addChangeProjectWindow();"
+                            ng-if="loginUser.role == 'PM' || loginUser.role == 'ADMIN'">Change Project
+                    </button>
+                </div>
+                <br/>
             </div>
             <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 no-float">
                 <div>
-                    <select ng-class="projectStatusLayout[selProject.status]" ng-model="selProject.status" ng-change="changeProjectStatus(selProject.status);">
-                        <option ng-repeat="status in PROJECT_STATUSES" class="btn btn-mini" ng-class="projectStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4></option>
+                    <select ng-class="projectStatusLayout[selProject.status]" ng-model="selProject.status"
+                            ng-change="changeProjectStatus(selProject.status);">
+                        <option ng-repeat="status in PROJECT_STATUSES" class="btn btn-mini"
+                                ng-class="projectStatusLayout[status]"><h4 style="padding: 10px;">{{status}}</h4>
+                        </option>
                     </select>
                 </div>
                 <p>Users on this project:</p>
+
                 <p ng-repeat="user in selProject.users">
                     <span>{{user.name}}</span>
                 </p>
@@ -52,17 +64,14 @@
                         Title: <input type="text" ng-model="title"/><br/>
                         Description: <textarea ng-model="description"></textarea><br/>
                         Type: <select ng-model="type">
-                            <option ng-repeat="type in TASK_TYPES" value="{{type}}">{{type}}</option>
-                        </select><br/>
+                        <option ng-repeat="type in TASK_TYPES" value="{{type}}">{{type}}</option>
+                    </select><br/>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <div style="float: left">
-                        <button class="btn pull-left" ng-click="createTask(title, description, selProject.id, type);" data-dismiss="modal">Create Task</button><br/>
-                    </div>
-                    <div style="float: right">
-                        <button class="btn pull-right" data-dismiss="modal">Close</button>
-                    </div>
+                <div class="modal-footer btn-group" role="group">
+                    <button class="btn pull-left" ng-click="createTask(title, description, selProject.id, type);"
+                            data-dismiss="modal">Create Task
+                    </button><button class="btn pull-right" style="margin-left: 0" data-dismiss="modal">Close</button>
                 </div>
 
             </div>
@@ -83,29 +92,28 @@
                         Title: <input type="text" ng-model="selProject.title"/><br/>
                         Description: <textarea ng-model="selProject.description"></textarea><br/>
                         Status: <select ng-model="selProject.status">
-                            <option ng-repeat="pStatus in PROJECT_STATUSES" value="{{pStatus}}">{{pStatus}}</option>
-                        </select><br/>
+                        <option ng-repeat="pStatus in PROJECT_STATUSES" value="{{pStatus}}">{{pStatus}}</option>
+                    </select><br/>
                         Owner: <select ng-model="selProject.owner.id" ng-init="getUsers()">
-                            <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
-                        </select><br/>
-                    <br/>
+                        <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
+                    </select><br/>
+                        <br/>
                         <multipicker display-attr="name"
                                      selected-items="selProject.users"
                                      not-selected-items="usersNotInProject">
                         </multipicker>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <div style="float: left">
-                        <button class="btn pull-left" ng-click="changeProject(selProject.id, selProject.title, selProject.description, selProject.owner.id, selProject.status, selProject.users);" data-dismiss="modal">Change Project</button><br/>
-                    </div>
-                    <div style="float: right">
-                        <button class="btn pull-right" data-dismiss="modal">Close</button>
-                    </div>
+                <div class="modal-footer btn-group" role="group">
+                        <button class="btn pull-left"
+                                ng-click="changeProject(selProject.id, selProject.title, selProject.description, selProject.owner.id, selProject.status, selProject.users);"
+                                data-dismiss="modal">Change Project
+                        </button>
+                        <button class="btn pull-right" data-dismiss="modal" style="margin-left:0">Close</button>
                 </div>
 
             </div>
         </div>
-   </div>
+    </div>
 
 </div>

@@ -10,7 +10,7 @@
                 <th ng-if="loginUser.role == 'ADMIN' || loginUser.role == 'PM'">Delete</th>
             </tr>
             <tr ng-repeat="project in projects">
-                <td><a ng-click="getProjectView(project);">{{project.title}}</a></td>
+                <td><a class="project-title" ng-click="getProjectView(project);">{{project.title}}</a></td>
                 <td>{{project.owner.name}}</td>
                 <td>{{project.description}}</td>
                 <td ng-class="projectStatusLayout[project.status]">{{project.status}}</td>

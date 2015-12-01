@@ -2,13 +2,11 @@ body {
 	width: 100%;
 	height: 100%;
 	background-size: 100% auto;
-	background-color: #999999;
 }
 
 html {
 	margin: 0px;
 	height: 100%;
-	background-color: #999999;
 }
 
 .mycontainer {
@@ -71,4 +69,53 @@ multipicker {
 
 .multipicker-item:hover .icon {
     visibility: visible;
+}
+
+.nav.navbar-nav.navbar-right a,
+.project-title {
+    cursor: pointer;
+}
+
+.project-closed {
+    color: black;
+}
+
+.project-open {
+    color: darkorange;
+}
+
+.project-in-progress {
+    color: dodgerblue;
+}
+
+.project-resolved {
+    color: lightgreen;
+}
+
+.project-reopened {
+    color: darkorange;
+}
+
+.task-closed {
+    color: darkgreen;
+}
+
+.task-open {
+    color: darkorange;
+}
+
+.task-in-progress {
+    color: dodgerblue;
+}
+
+.task-review {
+    color: lightgreen;
+}
+
+.task-verifying {
+    color: darkorange;
+}
+
+.task-testing {
+    color: darkmagenta;
 }
